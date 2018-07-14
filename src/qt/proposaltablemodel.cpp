@@ -65,7 +65,7 @@ void ProposalTableModel::refreshProposals() {
 
     int mnCount = mnodeman.CountEnabled();
 
-    std::vector<CBudgetProposal*> winningProps = CBudgetManager::GetAllProposals(0);
+    std::vector<CBudgetProposal*> winningProps = GetAllProposals();
 
 
     for (CBudgetProposal* pbudgetProposal : winningProps)
