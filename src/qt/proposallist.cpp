@@ -501,7 +501,7 @@ void ProposalList::startDateRangeChanged()
     QSettings settings;
     settings.setValue("proposalStartDate", proposalStartDate->date().toString());
     
-    proposalProxyModel->setProposalStart(const CAmount& minimum);
+    proposalProxyModel->setProposalStart();
 }
 
 void ProposalList::endDateRangeChanged()
@@ -512,7 +512,7 @@ void ProposalList::endDateRangeChanged()
     QSettings settings;
     settings.setValue("proposalEndDate", proposalEndDate->date().toString());
     
-    proposalProxyModel->setProposalEnd(const CAmount& minimum);
+    proposalProxyModel->setProposalEnd();
 }
 
 void ProposalList::resizeEvent(QResizeEvent* event)
