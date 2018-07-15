@@ -493,7 +493,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
     return endDateRangeWidget;
 }
 
-void ProposalList::startDateRangeChanged()
+void ProposalList::startDateRangeChanged(const QString &startDate)
 {
     if(!proposalProxyModel)
         return;
@@ -501,11 +501,10 @@ void ProposalList::startDateRangeChanged()
     //QSettings settings;
     //settings.setValue("proposalStartDate", proposalStartDate->date().toString());
     
-    proposalProxyModel->setProposalStart(
-            CAmount(proposalStartDate->minimum()));
+    proposalProxyModel->setProposalStart(startDate.toInt());
 }
 
-void ProposalList::endDateRangeChanged()
+void ProposalList::endDateRangeChanged(const QString &endDate)
 {
     if(!proposalProxyModel)
         return;
@@ -513,8 +512,7 @@ void ProposalList::endDateRangeChanged()
     //QSettings settings;
     //settings.setValue("proposalEndDate", proposalEndDate->date().toString());
     
-    proposalProxyModel->setProposalEnd(
-            CAmount(proposalEndDate->minimum()));
+    proposalProxyModel->setProposalEnd(endDate.toInt());
 }
 
 void ProposalList::resizeEvent(QResizeEvent* event)
