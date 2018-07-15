@@ -98,8 +98,8 @@ private:
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);
-    //void startDateRangeChanged();
-    //void endDateRangeChanged();
+    void startDateRangeChanged();
+    void endDateRangeChanged();
     void voteYes();
     void voteNo();
     void voteAbstain();
