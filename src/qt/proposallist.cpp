@@ -446,10 +446,10 @@ QWidget *ProposalList::createStartDateRangeWidget()
     QHBoxLayout *layout = new QHBoxLayout(startDateRangeWidget);
     layout->setContentsMargins(0,0,0,0);
     layout->addSpacing(23);
-    layout->addWidget(new QLabel(tr("Start Block:")));
+    layout->addWidget(new QLabel(tr("Start Date:")));
 
 
-
+    proposalStartDate->setCalendarPopup(true);
     proposalStartDate->setMinimumWidth(100);
 
 
@@ -475,7 +475,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
     QHBoxLayout *layout = new QHBoxLayout(endDateRangeWidget);
     layout->setContentsMargins(0,0,0,0);
     layout->addSpacing(23);
-    layout->addWidget(new QLabel(tr("End Block:")));
+    layout->addWidget(new QLabel(tr("End Date:")));
 
 
     proposalEndDate->setCalendarPopup(true);
