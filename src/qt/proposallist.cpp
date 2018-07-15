@@ -117,21 +117,19 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
-    createStartDateRangeWidget = new QLineEdit(this);
-#if QT_VERSION >= 0x040700
-    createStartDateRangeWidget->setPlaceholderText(tr("Min percentage"));
-#endif
-    createStartDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
-    createStartDateRangeWidget->setObjectName("createStartDateRangeWidget");
-    hlayout->addWidget(createStartDateRangeWidget);	
-	
-    createEndDateRangeWidget = new QLineEdit(this);
-#if QT_VERSION >= 0x040700
-    createEndDateRangeWidget->setPlaceholderText(tr("Min percentage"));
-#endif
-    createEndDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
-    createEndDateRangeWidget->setObjectName("createEndDateRangeWidget");
-    hlayout->addWidget(createEndDateRangeWidget);		
+    QVBoxLayout *vlayout = new QVBoxLayout(this);
+    vlayout->setSpacing(0);
+
+    QTableView *view = new QTableView(this);
+    vlayout->addLayout(hlayout);
+    vlayout->addWidget(createStartDateRangeWidget());
+    vlayout->addWidget(createEndDateRangeWidget());
+    vlayout->addWidget(view);
+    vlayout->setSpacing(0);
+    int width = view->verticalScrollBar()->sizeHint().width();
+    hlayout->addSpacing(width);
+    hlayout->setTableColumnsToTrack(view->horizontalHeader());
+
     connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
     connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
 
@@ -437,6 +435,85 @@ void ProposalList::openProposalUrl()
          QDesktopServices::openUrl(selection.at(0).data(ProposalTableModel::ProposalUrlRole).toString());
 }
 
+QWidget *ProposalList::createStartDateRangeWidget()
+{
+    QString defaultDate = QDate::currentDate().toString();
+    QSettings settings;
+ 
+    startDateRangeWidget = new QFrame();
+    startDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    startDateRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(startDateRangeWidget);
+    layout->setContentsMargins(0,0,0,0);
+    layout->addSpacing(23);
+    layout->addWidget(new QLabel(tr("Start Block:")));
+
+
+
+    proposalStartDate->setMinimumWidth(100);
+
+
+
+    layout->addWidget(proposalStartDate);
+    layout->addStretch();
+
+    startDateRangeWidget->setVisible(false);
+
+
+
+    return startDateRangeWidget;
+}
+
+QWidget *ProposalList::createEndDateRangeWidget()
+{
+
+    QSettings settings;
+ 
+    endDateRangeWidget = new QFrame();
+    endDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    endDateRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(endDateRangeWidget);
+    layout->setContentsMargins(0,0,0,0);
+    layout->addSpacing(23);
+    layout->addWidget(new QLabel(tr("End Block:")));
+
+
+    proposalEndDate->setCalendarPopup(true);
+    proposalEndDate->setMinimumWidth(100);
+
+
+
+    layout->addWidget(proposalEndDate);
+    layout->addStretch();
+
+    endDateRangeWidget->setVisible(false);
+
+
+
+    return endDateRangeWidget;
+}
+
+void ProposalList::startDateRangeChanged()
+{
+    if(!proposalProxyModel)
+        return;
+    	
+    QSettings settings;
+    settings.setValue("proposalStartDate", proposalStartDate->date().toString());
+    
+    proposalProxyModel->setProposalStart();
+}
+
+void ProposalList::endDateRangeChanged()
+{
+    if(!proposalProxyModel)
+        return;
+    
+    QSettings settings;
+    settings.setValue("proposalEndDate", proposalEndDate->date().toString());
+    
+    proposalProxyModel->setProposalEnd();
+}
 
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
