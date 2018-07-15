@@ -166,9 +166,9 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         case Abstains:
             return rec->Abstains;
         case StartBlock:
-            return (QDateTime::fromTime_t((qint32)rec->start_block)).date().toString(Qt::SystemLocaleLongDate);
+            return (QDateTime::fromTime_t((qint32)rec->start_block)).block().toString(Qt::SystemLocaleLongDate);
         case EndBlock:
-            return (QDateTime::fromTime_t((qint32)rec->end_block)).date().toString(Qt::SystemLocaleLongDate);
+            return (QDateTime::fromTime_t((qint32)rec->end_block)).block().toString(Qt::SystemLocaleLongDate);
         case Percentage:
             return QString("%1\%").arg(rec->percentage);
         case Amount:
