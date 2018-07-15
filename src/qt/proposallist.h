@@ -56,7 +56,8 @@ public:
         NO_VOTES_COLUMN_WIDTH = 60,
         ABSTAIN_COLUMN_WIDTH = 60,
         AMOUNT_COLUMN_WIDTH = 100,
-        PERCENTAGE_COLUMN_WIDTH = 80
+        PERCENTAGE_COLUMN_WIDTH = 80,
+        MINIMUM_COLUMN_WIDTH = 60		
     };
 
 private:
@@ -90,7 +91,7 @@ private:
     //QWidget *createEndDateRangeWidget();
     void vote_click_handler(const std::string voteString);
 
-    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
+    //GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
 
     virtual void resizeEvent(QResizeEvent* event);
 
