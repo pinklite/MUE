@@ -68,6 +68,22 @@ ProposalList::ProposalList(   QWidget *parent) :
     amountWidget->setObjectName("amountWidget");
     hlayout->addWidget(amountWidget);
 
+    startDateWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    startDateWidget->setPlaceholderText(tr("Start Block"));
+#endif
+    startDateWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    startDateWidget->setObjectName("startDateWidget");
+    hlayout->addWidget(startDateWidget);
+
+    endDateWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    endDateWidget->setPlaceholderText(tr("End Block"));
+#endif
+    endDateWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    endDateWidget->setObjectName("endDateWidget");
+    hlayout->addWidget(endDateWidget);	
+	
     yesVotesWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
     yesVotesWidget->setPlaceholderText(tr("Min yes votes"));
@@ -100,21 +116,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
-    startDateWidget = new QLineEdit(this);
-#if QT_VERSION >= 0x040700
-    startDateWidget->setPlaceholderText(tr("Start Block"));
-#endif
-    startDateWidget->setValidator(new QIntValidator(0, INT_MAX, this));
-    startDateWidget->setObjectName("startDateWidget");
-    hlayout->addWidget(startDateWidget);
 
-    endDateWidget = new QLineEdit(this);
-#if QT_VERSION >= 0x040700
-    endDateWidget->setPlaceholderText(tr("End Block"));
-#endif
-    endDateWidget->setValidator(new QIntValidator(0, INT_MAX, this));
-    endDateWidget->setObjectName("endDateWidget");
-    hlayout->addWidget(endDateWidget);
 
 
 
