@@ -224,7 +224,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->setColumnWidth(ProposalTableModel::EndDate, END_DATE_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::YesVotes, YES_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::NoVotes, NO_VOTES_COLUMN_WIDTH);
-    proposalList->setColumnWidth(ProposalTableModel::Abstains, ABSOLUTE_YES_COLUMN_WIDTH);
+    proposalList->setColumnWidth(ProposalTableModel::Abstains, NO_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Amount, AMOUNT_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Percentage, PERCENTAGE_COLUMN_WIDTH);
 

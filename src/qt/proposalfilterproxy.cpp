@@ -9,8 +9,8 @@
 
 #include <QDateTime>
 
-const QDateTime ProposalFilterProxy::MIN_DATE = QDateTime::fromTime_t(0);
-const QDateTime ProposalFilterProxy::MAX_DATE = QDateTime::fromTime_t(0xFFFFFFFF);
+//const QDateTime ProposalFilterProxy::MIN_DATE = QDateTime::fromTime_t(0);
+//const QDateTime ProposalFilterProxy::MAX_DATE = QDateTime::fromTime_t(0xFFFFFFFF);
 
 ProposalFilterProxy::ProposalFilterProxy(QObject *parent) :
     QSortFilterProxyModel(parent),
