@@ -117,13 +117,20 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
+    QVBoxLayout *vlayout = new QVBoxLayout(this);
+    vlayout->setSpacing(0);
+
+    QTableView *view = new QTableView(this);
+    vlayout->addLayout(hlayout);	
+	
+	
     startDateRangeWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
     startDateRangeWidget->setPlaceholderText(tr("Min percentage"));
 #endif
     startDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
     startDateRangeWidget->setObjectName("startDateRangeWidget");
-    hlayout->addWidget(startDateRangeWidget);	
+    vlayout->addWidget(startDateRangeWidget);	
 	
     endDateRangeWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
@@ -131,11 +138,11 @@ ProposalList::ProposalList(   QWidget *parent) :
 #endif
     endDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
     endDateRangeWidget->setObjectName("endDateRangeWidget");
-    hlayout->addWidget(endDateRangeWidget);		
+    vlayout->addWidget(endDateRangeWidget);		
 	
 	
-    hlayout->addWidget(view);
-    hlayout->setSpacing(0);
+    vlayout->addWidget(view);
+    vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
     hlayout->addSpacing(width);
     hlayout->setTableColumnsToTrack(view->horizontalHeader());	
