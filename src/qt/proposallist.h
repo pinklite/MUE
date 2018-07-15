@@ -87,8 +87,8 @@ private:
 
     ColumnAlignedLayout *hlayout;
 
-    QLineEdit *createStartBlockRangeWidget;
-    QLineEdit *createEndBlockRangeWidget;
+    QWidget *createStartBlockRangeWidget();
+    QWidget *createEndBlockRangeWidget();
     void vote_click_handler(const std::string voteString);
 
     GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
