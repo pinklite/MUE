@@ -103,13 +103,14 @@ void ProposalTableModel::refreshProposals() {
         //UniValue objResult(UniValue::VOBJ);
         //UniValue dataObj(UniValue::VOBJ);
         //objResult.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
-
-        //std::vector<UniValue> arr1 = objResult.getValues();
-        //std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
-        //dataObj = arr2.at( 1 );
-
+		
 		UniValue bObj(UniValue::VOBJ);
-		budgetToST(pbudgetProposal, bObj);		
+		budgetToST(pbudgetProposal, bObj);	
+        std::vector<UniValue> arr1 = bObj.getValues();
+        std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
+        dataObj = arr2.at( 1 );
+
+	
 		
         int percentage = 0;
 		
@@ -117,14 +118,14 @@ void ProposalTableModel::refreshProposals() {
         
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
-                        pbudgetProposal->GetBlockStart(),
-                        pbudgetProposal->GetBlockEnd(),
+                        dataObj["BlockStart"].get_int(),
+                        dataObj["BlockEnd"].get_int(),
                         QString::fromStdString(pbudgetProposal->GetURL()),
                         QString::fromStdString(pbudgetProposal->GetName()),
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()),
+                        dataObj["TotalPayment"].get_int(),
                         percentage));
     }
     endResetModel();
