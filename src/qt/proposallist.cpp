@@ -104,7 +104,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 #if QT_VERSION >= 0x040700
     abstainVotesWidget->setPlaceholderText(tr("Min abstain votes"));
 #endif
-    abstainVotesWidget->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
+    abstainVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
     abstainVotesWidget->setObjectName("abstainVotesWidget");
     hlayout->addWidget(abstainVotesWidget);
 
