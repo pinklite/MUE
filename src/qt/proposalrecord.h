@@ -17,22 +17,22 @@ class ProposalRecord
 {
 public:
     ProposalRecord():
-            hash(""), start_block(0), end_block(0), url(""), name(""), yesVotes(0), noVotes(0), Abstains(0), amount(0), percentage(0)
+            hash(""), start_epoch(0), end_epoch(0), url(""), name(""), yesVotes(0), noVotes(0), Abstains(0), amount(0), percentage(0)
     {
     }
 
-    ProposalRecord(QString hash, const CAmount& start_block, const CAmount& end_block,
+    ProposalRecord(QString hash, qint64 start_epoch, qint64 end_epoch,
                 QString url, QString name,
                 const CAmount& yesVotes, const CAmount& noVotes, const CAmount& Abstains,
                 const CAmount& amount, const CAmount& percentage):
-            hash(hash), start_block(start_block), end_block(end_block), url(url), name(name), yesVotes(yesVotes), noVotes(noVotes),
+            hash(hash), start_epoch(start_epoch), end_epoch(end_epoch), url(url), name(name), yesVotes(yesVotes), noVotes(noVotes),
             Abstains(Abstains), amount(amount), percentage(percentage)
     {
     }
 
     QString hash;
-    CAmount& start_block;
-    CAmount& end_block;
+    qint64 start_epoch;
+    qint64 end_epoch;
     QString url;
     QString name;
     CAmount yesVotes;

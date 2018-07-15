@@ -67,8 +67,8 @@ private:
     int64_t nLastUpdate = 0;
 
     QLineEdit *proposalWidget;
-    QComboBox *startBlockWidget;
-    QComboBox *endBlockWidget;
+    QComboBox *startDateWidget;
+    QComboBox *endDateWidget;
     QTimer *timer;
 
     QLineEdit *yesVotesWidget;
@@ -80,15 +80,15 @@ private:
 
     QMenu *contextMenu;
 
-    QFrame *startBlockRangeWidget;
-    QDateTimeEdit *proposalStartBlock;
+    QFrame *startDateRangeWidget;
+    QDateTimeEdit *proposalStartDate;
 
-    QFrame *endBlockRangeWidget;
-    QDateTimeEdit *proposalEndBlock;
+    QFrame *endDateRangeWidget;
+    QDateTimeEdit *proposalEndDate;
     ColumnAlignedLayout *hlayout;
 
-    QWidget *createStartBlockRangeWidget();
-    QWidget *createEndBlockRangeWidget();
+    QWidget *createStartDateRangeWidget();
+    QWidget *createEndDateRangeWidget();
     void vote_click_handler(const std::string voteString);
 
     GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
@@ -97,8 +97,8 @@ private:
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);
-    void startBlockRangeChanged();
-    void endBlockRangeChanged();
+    void startDateRangeChanged();
+    void endDateRangeChanged();
     void voteYes();
     void voteNo();
     void voteAbstain();
@@ -111,8 +111,8 @@ Q_SIGNALS:
 public Q_SLOTS:
     void refreshProposals(bool force = false);
     void changedProposal(const QString &proposal);
-    void chooseStartBlock(int idx);
-    void chooseEndBlock(int idx);
+    void chooseStartDate(int idx);
+    void chooseEndDate(int idx);
     void changedYesVotes(const QString &minYesVotes);
     void changedNoVotes(const QString &minNoVotes);
     void changedAbstains(const QString &minAbstains);
