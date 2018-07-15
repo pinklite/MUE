@@ -114,7 +114,7 @@ void ProposalTableModel::refreshProposals() {
         int percentage = 0;
 		
         if(mnCount > 0) percentage = round(pbudgetProposal->GetYeas() * 100 / mnCount);
-        
+        int amount = 0;
 		amount = ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount());
 		
         proposalRecords.append(new ProposalRecord(
