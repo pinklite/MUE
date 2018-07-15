@@ -452,9 +452,87 @@ void ProposalList::openProposalUrl()
          QDesktopServices::openUrl(selection.at(0).data(ProposalTableModel::ProposalUrlRole).toString());
 }
 
+QWidget *ProposalList::createStartBlockRangeWidget()
+{
+    QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
+    QSettings settings;
+ 
+    startBlockRangeWidget = new QFrame();
+    startBlockRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    startBlockRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(startBlockRangeWidget);
+    layout->setContentsMargins(0,0,0,0);
+    layout->addSpacing(23);
+    layout->addWidget(new QLabel(tr("Start Date:")));
 
+    proposalStartBlock = new QDateTimeEdit(this);
+    proposalStartBlock->setCalendarPopup(true);
+    proposalStartBlock->setMinimumWidth(100);
 
+    proposalStartBlock->setDate(QDate::fromString(settings.value("proposalStartBlock", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
 
+    layout->addWidget(proposalStartBlock);
+    layout->addStretch();
+
+    startBlockRangeWidget->setVisible(false);
+
+    connect(proposalStartBlock, SIGNAL(blockChanged(QDate)), this, SLOT(startBlockRangeChanged()));
+
+    return startBlockRangeWidget;
+}
+
+QWidget *ProposalList::createEndBlockRangeWidget()
+{
+    QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
+    QSettings settings;
+ 
+    endBlockRangeWidget = new QFrame();
+    endBlockRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    endBlockRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(endBlockRangeWidget);
+    layout->setContentsMargins(0,0,0,0);
+    layout->addSpacing(23);
+    layout->addWidget(new QLabel(tr("End Date:")));
+
+    proposalEndBlock = new QDateTimeEdit(this);
+    proposalEndBlock->setCalendarPopup(true);
+    proposalEndBlock->setMinimumWidth(100);
+
+    proposalEndBlock->setDate(QDate::fromString(settings.value("proposlEndBlock", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
+
+    layout->addWidget(proposalEndBlock);
+    layout->addStretch();
+
+    endBlockRangeWidget->setVisible(false);
+
+    connect(proposalEndBlock, SIGNAL(blockChanged(QDate)), this, SLOT(endBlockRangeChanged()));
+
+    return endBlockRangeWidget;
+}
+
+void ProposalList::startBlockRangeChanged()
+{
+    if(!proposalProxyModel)
+        return;
+    
+    QSettings settings;
+    settings.setValue("proposalStartBlock", proposalStartBlock->block().toString(PERSISTENCE_DATE_FORMAT));
+    
+    proposalProxyModel->setProposalStart(
+            QDateTime(proposalStartBlock->block()));
+}
+
+void ProposalList::endBlockRangeChanged()
+{
+    if(!proposalProxyModel)
+        return;
+    
+    QSettings settings;
+    settings.setValue("proposalEndBlock", proposalEndBlock->block().toString(PERSISTENCE_DATE_FORMAT));
+    
+    proposalProxyModel->setProposalEnd(
+            QDateTime(proposalEndBlock->block()));
+}
 
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
