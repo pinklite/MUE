@@ -476,7 +476,7 @@ QWidget *ProposalList::createStartBlockRangeWidget()
 
     startBlockRangeWidget->setVisible(false);
 
-    connect(proposalStartBlock, SIGNAL(blockChanged(QDate)), this, SLOT(startBlockRangeChanged()));
+    connect(proposalStartBlock, SIGNAL(dateChanged(QDate)), this, SLOT(startBlockRangeChanged()));
 
     return startBlockRangeWidget;
 }
@@ -505,7 +505,7 @@ QWidget *ProposalList::createEndBlockRangeWidget()
 
     endBlockRangeWidget->setVisible(false);
 
-    connect(proposalEndBlock, SIGNAL(blockChanged(QDate)), this, SLOT(endBlockRangeChanged()));
+    connect(proposalEndBlock, SIGNAL(dateChanged(QDate)), this, SLOT(endBlockRangeChanged()));
 
     return endBlockRangeWidget;
 }
@@ -516,10 +516,10 @@ void ProposalList::startBlockRangeChanged()
         return;
     
     QSettings settings;
-    settings.setValue("proposalStartBlock", proposalStartBlock->block().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalStartBlock", proposalStartBlock->date().toString(PERSISTENCE_DATE_FORMAT));
     
     proposalProxyModel->setProposalStart(
-            QDateTime(proposalStartBlock->block()));
+            QDateTime(proposalStartBlock->date()));
 }
 
 void ProposalList::endBlockRangeChanged()
@@ -528,10 +528,10 @@ void ProposalList::endBlockRangeChanged()
         return;
     
     QSettings settings;
-    settings.setValue("proposalEndBlock", proposalEndBlock->block().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalEndBlock", proposalEndBlock->date().toString(PERSISTENCE_DATE_FORMAT));
     
     proposalProxyModel->setProposalEnd(
-            QDateTime(proposalEndBlock->block()));
+            QDateTime(proposalEndBlock->date()));
 }
 
 void ProposalList::resizeEvent(QResizeEvent* event)
