@@ -445,7 +445,7 @@ void ProposalList::openProposalUrl()
 
 QWidget *ProposalList::createStartDateRangeWidget()
 {
-    QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
+    QString defaultDate = QDate::currentDate().toString();
     QSettings settings;
  
     startDateRangeWidget = new QFrame();
@@ -456,25 +456,25 @@ QWidget *ProposalList::createStartDateRangeWidget()
     layout->addSpacing(23);
     layout->addWidget(new QLabel(tr("Start Date:")));
 
-    proposalStartDate = new QDateTimeEdit(this);
+
     proposalStartDate->setCalendarPopup(true);
     proposalStartDate->setMinimumWidth(100);
 
-    proposalStartDate->setDate(QDate::fromString(settings.value("proposalStartDate", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
+
 
     layout->addWidget(proposalStartDate);
     layout->addStretch();
 
     startDateRangeWidget->setVisible(false);
 
-    connect(proposalStartDate, SIGNAL(dateChanged(QDate)), this, SLOT(startDateRangeChanged()));
+
 
     return startDateRangeWidget;
 }
 
 QWidget *ProposalList::createEndDateRangeWidget()
 {
-    QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
+
     QSettings settings;
  
     endDateRangeWidget = new QFrame();
@@ -485,18 +485,18 @@ QWidget *ProposalList::createEndDateRangeWidget()
     layout->addSpacing(23);
     layout->addWidget(new QLabel(tr("End Date:")));
 
-    proposalEndDate = new QDateTimeEdit(this);
+
     proposalEndDate->setCalendarPopup(true);
     proposalEndDate->setMinimumWidth(100);
 
-    proposalEndDate->setDate(QDate::fromString(settings.value("proposlEndDate", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
+
 
     layout->addWidget(proposalEndDate);
     layout->addStretch();
 
     endDateRangeWidget->setVisible(false);
 
-    connect(proposalEndDate, SIGNAL(dateChanged(QDate)), this, SLOT(endDateRangeChanged()));
+
 
     return endDateRangeWidget;
 }
@@ -507,7 +507,7 @@ void ProposalList::startDateRangeChanged()
         return;
     
     QSettings settings;
-    settings.setValue("proposalStartDate", proposalStartDate->date().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalStartDate", proposalStartDate->date().toString());
     
     proposalProxyModel->setProposalStart(
             QDateTime(proposalStartDate->date()));
@@ -519,7 +519,7 @@ void ProposalList::endDateRangeChanged()
         return;
     
     QSettings settings;
-    settings.setValue("proposalEndDate", proposalEndDate->date().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalEndDate", proposalEndDate->date().toString());
     
     proposalProxyModel->setProposalEnd(
             QDateTime(proposalEndDate->date()));
