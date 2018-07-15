@@ -225,8 +225,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 	
     columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
         
-    chooseStartDate(settings.value("proposalStartDate").toInt());
-    chooseEndDate(settings.value("proposalEndDate").toInt());
+    chooseStartDate(settings.value("proposalStartDate"));
+    chooseEndDate(settings.value("proposalEndDate"));
 
     nLastUpdate = GetTime();
 
