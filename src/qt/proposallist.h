@@ -49,7 +49,7 @@ public:
     };
 
     enum ColumnWidths {
-        PROPOSAL_COLUMN_WIDTH = 380,
+        PROPOSAL_COLUMN_WIDTH = 200,
         START_DATE_COLUMN_WIDTH = 110,
         END_DATE_COLUMN_WIDTH = 110,
         YES_VOTES_COLUMN_WIDTH = 60,
