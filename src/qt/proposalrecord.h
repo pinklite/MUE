@@ -31,8 +31,8 @@ public:
     }
 
     QString hash;
-    CAmount& start_block;
-    CAmount& end_block;
+    CAmount start_block;
+    CAmount end_block;
     QString url;
     QString name;
     CAmount yesVotes;
