@@ -59,24 +59,7 @@ ProposalTableModel::~ProposalTableModel()
 {
 }
 
-std::vector<CBudgetProposal*> CBudgetManager::GetAllProposals()
-{
-    LOCK(cs);
 
-    std::vector<CBudgetProposal*> vBudgetProposalRet;
-
-    std::map<uint256, CBudgetProposal>::iterator it = mapProposals.begin();
-    while (it != mapProposals.end()) {
-        (*it).second.CleanAndRemove(false);
-
-        CBudgetProposal* pbudgetProposal = &((*it).second);
-        vBudgetProposalRet.push_back(pbudgetProposal);
-
-        ++it;
-    }
-
-    return vBudgetProposalRet;
-}
 
 void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
 {
