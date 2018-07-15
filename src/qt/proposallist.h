@@ -97,6 +97,8 @@ private:
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);
+    void startBlockRangeChanged();
+    void endBlockRangeChanged();
     void voteYes();
     void voteNo();
     void voteAbstain();
