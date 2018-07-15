@@ -42,7 +42,7 @@ static const char* PERSISTENCE_DATE_FORMAT = "yyyy-MM-dd";
 
 ProposalList::ProposalList(   QWidget *parent) :
     QWidget(parent), proposalTableModel(0), proposalProxyModel(0),
-    proposalList(0), columnResizingFixer(0)
+    proposalList(0)/*, columnResizingFixer(0)*/
 {
     proposalTableModel = new ProposalTableModel( this); 
     QSettings settings;
