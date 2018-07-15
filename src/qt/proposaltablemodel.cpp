@@ -102,13 +102,15 @@ void ProposalTableModel::refreshProposals() {
 
         //UniValue objResult(UniValue::VOBJ);
         //UniValue dataObj(UniValue::VOBJ);
-        //objResult.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
+        //
 		
+		UniValue returnObj(UniValue::VOBJ);
 		UniValue bObj(UniValue::VOBJ);
+		returnObj.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
 		budgetToST(pbudgetProposal, bObj);	
         std::vector<UniValue> arr1 = bObj.getValues();
         std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
-        dataObj = arr2.at( 1 );
+        returnObj = arr2.at( 1 );
 
 	
 		
