@@ -164,8 +164,8 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
             return rec->yesVotes;
         case NoVotes:
             return rec->noVotes;
-        case Abstains:
-            return rec->Abstains;
+        case AbstainVotes:
+            return rec->abstainVotes;
         case StartDate:
             return rec->start_epoch;
         case EndDate:
@@ -189,8 +189,8 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
             return rec->yesVotes;
         case NoVotes:
             return rec->noVotes;
-        case Abstains:
-            return rec->Abstains;
+        case AbstainVotes:
+            return rec->abstainVotes;
         case Amount:
             return qint64(rec->amount);
         case Percentage:
@@ -222,8 +222,8 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         return rec->yesVotes;
     case NoVotesRole:
         return rec->noVotes;
-    case AbstainsRole:
-        return rec->Abstains;
+    case AbstainVotesRole:
+        return rec->abstainVotes;
     case PercentageRole:
         return rec->percentage;
     case ProposalUrlRole:
@@ -260,7 +260,7 @@ QVariant ProposalTableModel::headerData(int section, Qt::Orientation orientation
                 return tr("Obtained yes votes.");
             case NoVotes:
                 return tr("Obtained no votes.");
-            case Abstains:
+            case AbstainVotes:
                 return tr("Obtained abstains votes.");
             case Amount:
                 return tr("Proposed amount.");

@@ -30,7 +30,7 @@ public:
     void setMinPercentage(const CAmount& minimum);
     void setMinYesVotes(const CAmount& minimum);
     void setMinNoVotes(const CAmount& minimum);
-    void setMinAbstains(const CAmount& minimum);
+    void setMinAbstainVotes(const CAmount& minimum);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
@@ -45,7 +45,7 @@ private:
     CAmount minPercentage;
     CAmount minYesVotes;
     CAmount minNoVotes;
-    CAmount minAbstains;
+    CAmount minAbstainVotes;
 };
 
 #endif // BITCOIN_QT_PROPOSALFILTERPROXY_H

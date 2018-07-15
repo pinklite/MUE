@@ -73,7 +73,7 @@ private:
 
     QLineEdit *yesVotesWidget;
     QLineEdit *noVotesWidget;
-    QLineEdit *AbstainsWidget;
+    QLineEdit *abstainVotesWidget;
     QLineEdit *amountWidget;
     QLineEdit *percentageWidget;
     QLabel *secondsLabel;
@@ -115,7 +115,7 @@ public Q_SLOTS:
     void chooseEndDate(const QString &endDate);
     void changedYesVotes(const QString &minYesVotes);
     void changedNoVotes(const QString &minNoVotes);
-    void changedAbstains(const QString &minAbstains);
+    void changedAbstainVotes(const QString &minAbstainVotes);
     void changedPercentage(const QString &minPercentage);
     void changedAmount(const QString &minAmount);
 

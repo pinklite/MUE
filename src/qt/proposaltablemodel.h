@@ -43,7 +43,7 @@ public:
         EndDate = 3,
         YesVotes = 4,
         NoVotes = 5,
-        Abstains = 6,
+        AbstainVotes = 6,
         Percentage = 7
     };
 
@@ -54,7 +54,7 @@ public:
         EndDateRole,
         YesVotesRole,
         NoVotesRole,
-        AbstainsRole,
+        AbstainVotesRole,
         PercentageRole,
         ProposalUrlRole,
         ProposalHashRole,

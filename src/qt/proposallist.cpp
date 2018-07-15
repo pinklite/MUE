@@ -100,13 +100,13 @@ ProposalList::ProposalList(   QWidget *parent) :
     noVotesWidget->setObjectName("noVotesWidget");
     hlayout->addWidget(noVotesWidget);
 
-    AbstainsWidget = new QLineEdit(this);
+    abstainVotesWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    AbstainsWidget->setPlaceholderText(tr("Min abstain votes"));
+    abstainVotesWidget->setPlaceholderText(tr("Min abstain votes"));
 #endif
-    AbstainsWidget->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
-    AbstainsWidget->setObjectName("AbstainsWidget");
-    hlayout->addWidget(AbstainsWidget);
+    abstainVotesWidget->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
+    abstainVotesWidget->setObjectName("abstainVotesWidget");
+    hlayout->addWidget(abstainVotesWidget);
 
     percentageWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
@@ -193,7 +193,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     connect(endDateWidget, SIGNAL(textChanged(QString)), this, SLOT(chooseEndDate(QString)));
     connect(yesVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedYesVotes(QString)));
     connect(noVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedNoVotes(QString)));
-    connect(AbstainsWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAbstains(QString)));
+    connect(abstainVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAbstainVotes(QString)));
     connect(amountWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAmount(QString)));
     connect(percentageWidget, SIGNAL(textChanged(QString)), this, SLOT(changedPercentage(QString)));
 
@@ -227,7 +227,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->setColumnWidth(ProposalTableModel::EndDate, END_DATE_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::YesVotes, YES_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::NoVotes, NO_VOTES_COLUMN_WIDTH);
-    proposalList->setColumnWidth(ProposalTableModel::Abstains, NO_VOTES_COLUMN_WIDTH);
+    proposalList->setColumnWidth(ProposalTableModel::AbstainVotes, ABSTAIN_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Amount, AMOUNT_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Percentage, PERCENTAGE_COLUMN_WIDTH);
 
@@ -324,14 +324,14 @@ void ProposalList::changedNoVotes(const QString &minNoVotes)
     proposalProxyModel->setMinNoVotes(minNoVotes.toInt());
 }
 
-void ProposalList::changedAbstains(const QString &minAbstains)
+void ProposalList::changedAbstainVotes(const QString &minAbstainVotes)
 {
     if(!proposalProxyModel)
         return;
 
-    int value = minAbstains == "" ? INT_MIN : minAbstains.toInt();
+    int value = minAbstainVotes == "" ? INT_MIN : minAbstainsVotes.toInt();
 
-    proposalProxyModel->setMinAbstains(value);
+    proposalProxyModel->setMinAbstainsVotes(value);
 }
 
 void ProposalList::contextualMenu(const QPoint &point)
