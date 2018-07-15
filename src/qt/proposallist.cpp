@@ -70,6 +70,22 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     yesVotesWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
+    yesVotesWidget->setPlaceholderText(tr("Min start blocks"));
+#endif
+    yesVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    yesVotesWidget->setObjectName("yesVotesWidget");
+    hlayout->addWidget(startDateWidget);
+
+    yesVotesWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    yesVotesWidget->setPlaceholderText(tr("Min end blocks"));
+#endif
+    yesVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    yesVotesWidget->setObjectName("yesVotesWidget");
+    hlayout->addWidget(endDateWidget);
+
+    yesVotesWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
     yesVotesWidget->setPlaceholderText(tr("Min yes votes"));
 #endif
     yesVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
@@ -106,8 +122,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);
-    vlayout->addWidget(startDateWidget);
-    vlayout->addWidget(endDateWidget);
+    vlayout->addWidget(startDateRangeWidget);
+    vlayout->addWidget(endDateRangeWidget);
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
