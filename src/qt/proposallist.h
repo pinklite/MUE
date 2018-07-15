@@ -81,10 +81,10 @@ private:
     QMenu *contextMenu;
 
     QFrame *startBlockRangeWidget;
-
+    QDateTimeEdit *proposalStartBlock;
 
     QFrame *endBlockRangeWidget;
-
+    QDateTimeEdit *proposalEndBlock;
     ColumnAlignedLayout *hlayout;
 
     QWidget *createStartBlockRangeWidget();
