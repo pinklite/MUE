@@ -22,8 +22,8 @@ public:
 
     static const QDateTime MAX_DATE;
 
-    void setProposalStart(const QDateTime &date);
-    void setProposalEnd(const QDateTime &date);
+    void setProposalStart(const CAmount& minimum);
+    void setProposalEnd(const CAmount& minimum);
     void setProposal(const QString &proposal);
     
     void setMinAmount(const CAmount& minimum);
@@ -38,8 +38,8 @@ protected:
     bool filterAcceptsRow(int source_row, const QModelIndex & source_parent) const;
 
 private:
-    QDateTime startDate;
-    QDateTime endDate;
+    CAmount startDate;
+    CAmount endDate;
     QString proposalName;
     CAmount minAmount;
     CAmount minPercentage;
