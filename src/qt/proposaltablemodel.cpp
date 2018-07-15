@@ -166,9 +166,9 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         case Abstains:
             return rec->Abstains;
         case StartDate:
-            return (QDateTime::fromTime_t((qint32)rec->start_epoch)).date().toString(Qt::SystemLocaleLongDate);
+            return rec->start_epoch;
         case EndDate:
-            return (QDateTime::fromTime_t((qint32)rec->end_epoch)).date().toString(Qt::SystemLocaleLongDate);
+            return rec->end_epoch;
         case Percentage:
             return QString("%1\%").arg(rec->percentage);
         case Amount:
