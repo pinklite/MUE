@@ -21,7 +21,7 @@ public:
     {
     }
 
-    ProposalRecord(QString hash, qint64 start_epoch, qint64 end_epoch,
+    ProposalRecord(QString hash, const CAmount& start_epoch, const CAmount& end_epoch,
                 QString url, QString name,
                 const CAmount& yesVotes, const CAmount& noVotes, const CAmount& Abstains,
                 const CAmount& amount, const CAmount& percentage):
@@ -31,8 +31,8 @@ public:
     }
 
     QString hash;
-    qint64 start_epoch;
-    qint64 end_epoch;
+    CAmount start_epoch;
+    CAmount end_epoch;
     QString url;
     QString name;
     CAmount yesVotes;

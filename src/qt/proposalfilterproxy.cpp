@@ -58,15 +58,15 @@ bool ProposalFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sou
     return true;
 }
 
-void ProposalFilterProxy::setProposalStart(const QDateTime &date)
+void ProposalFilterProxy::setProposalStart(const CAmount& minimum)
 {
-    this->startDate = date;
+    this->startDate = minimum;
     invalidateFilter();
 }
 
-void ProposalFilterProxy::setProposalEnd(const QDateTime &date)
+void ProposalFilterProxy::setProposalEnd(const CAmount& minimum)
 {
-    this->endDate = date;
+    this->endDate = minimum;
     invalidateFilter();
 }
 
