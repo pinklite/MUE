@@ -76,15 +76,18 @@ private:
     QLineEdit *AbstainsWidget;
     QLineEdit *amountWidget;
     QLineEdit *percentageWidget;
+    QLineEdit *startDateRangeWidget;
+    QLineEdit *endDateRangeWidget;		
     QLabel *secondsLabel;
 
+	
     QMenu *contextMenu;
 
-    QFrame *startDateRangeWidget;
-    QDateTimeEdit *proposalStartDate;
 
-    QFrame *endDateRangeWidget;
-    QDateTimeEdit *proposalEndDate;
+
+
+
+
     ColumnAlignedLayout *hlayout;
 
     QWidget *createStartDateRangeWidget();
