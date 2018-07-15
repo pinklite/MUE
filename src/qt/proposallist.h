@@ -111,8 +111,8 @@ Q_SIGNALS:
 public Q_SLOTS:
     void refreshProposals(bool force = false);
     void changedProposal(const QString &proposal);
-    void chooseStartDate(int idx);
-    void chooseEndDate(int idx);
+    void chooseStartDate(const QString &minYesVotes);
+    void chooseEndDate(const QString &minYesVotes);
     void changedYesVotes(const QString &minYesVotes);
     void changedNoVotes(const QString &minNoVotes);
     void changedAbstains(const QString &minAbstains);

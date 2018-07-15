@@ -501,7 +501,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
     return endDateRangeWidget;
 }
 
-void ProposalList::startDateRangeChanged()
+void ProposalList::startDateRangeChanged(const QString &startDate)
 {
     if(!proposalProxyModel)
         return;
@@ -509,7 +509,7 @@ void ProposalList::startDateRangeChanged()
     proposalProxyModel->setProposalStart(startDate.toInt())
 }
 
-void ProposalList::endDateRangeChanged()
+void ProposalList::endDateRangeChanged(const QString &endDate)
 {
     if(!proposalProxyModel)
         return;
