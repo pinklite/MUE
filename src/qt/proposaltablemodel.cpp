@@ -126,7 +126,7 @@ void ProposalTableModel::refreshProposals() {
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        amount2,
+                        amount,
                         percentage));
     }
     endResetModel();
