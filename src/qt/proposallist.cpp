@@ -506,10 +506,7 @@ void ProposalList::startDateRangeChanged()
     if(!proposalProxyModel)
         return;
     
-    QSettings settings;
-    settings.setValue("proposalStartDate", proposalStartDate->date().toString());
-    
-    proposalProxyModel->setProposalStart();
+    proposalProxyModel->setProposalStart(startDate.toInt())
 }
 
 void ProposalList::endDateRangeChanged()
@@ -517,10 +514,7 @@ void ProposalList::endDateRangeChanged()
     if(!proposalProxyModel)
         return;
     
-    QSettings settings;
-    settings.setValue("proposalEndDate", proposalEndDate->date().toString());
-    
-    proposalProxyModel->setProposalEnd();
+    proposalProxyModel->setProposalEnd(endDate.toInt());
 }
 
 void ProposalList::resizeEvent(QResizeEvent* event)
