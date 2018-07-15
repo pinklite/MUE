@@ -445,7 +445,7 @@ QWidget *ProposalList::createStartDateRangeWidget()
 #endif
     startDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
     startDateRangeWidget->setObjectName("startDateRangeWidget");
-    layout->addWidget(proposalStartDate);
+    hlayout->addWidget(proposalStartDate);
 
     /*QSettings settings;
  
@@ -483,7 +483,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
 #endif
     endDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
     endDateRangeWidget->setObjectName("endDateRangeWidget");
-    layout->addWidget(proposalEndDate);
+    hlayout->addWidget(proposalEndDate);
 	
 	
     /*QSettings settings;
