@@ -274,7 +274,7 @@ void ProposalList::chooseStartDate(int idx)
     {
     case All:
         proposalProxyModel->setProposalStart(
-                ProposalFilterProxy::MIN_DATE);
+                ProposalFilterProxy::INT_MIN);
         break;
     case Today:
         proposalProxyModel->setProposalStart(
@@ -321,7 +321,7 @@ void ProposalList::chooseEndDate(int idx)
     {
     case All:
         proposalProxyModel->setProposalEnd(
-                ProposalFilterProxy::MAX_DATE);
+                ProposalFilterProxy::INT_MIN);
         break;
     case Today:
         proposalProxyModel->setProposalEnd(
