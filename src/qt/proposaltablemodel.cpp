@@ -113,8 +113,7 @@ void ProposalTableModel::refreshProposals() {
     int mnCount = mnodeman.CountEnabled();
     std::vector<CBudgetProposal*> bObj = budget.GetAllProposals();
 
-    UniValue bObj(UniValue::VOBJ);
-    budgetToST(pbudgetProposal, bObj);	
+
     for (CBudgetProposal* pbudgetProposal : bObj)
     {
         //if(CBudgetProposal::CBudgetProposal() != GOVERNANCE_OBJECT_PROPOSAL) continue;
@@ -127,7 +126,8 @@ void ProposalTableModel::refreshProposals() {
         //std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
         //dataObj = arr2.at( 1 );
 
-	
+		UniValue bObj(UniValue::VOBJ);
+		budgetToST(pbudgetProposal, bObj);		
 		
         int percentage = 0;
 		
