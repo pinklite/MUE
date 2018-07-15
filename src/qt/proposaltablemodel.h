@@ -39,8 +39,8 @@ public:
     enum ColumnIndex {
         Proposal = 0,
         Amount = 1,
-        StartDate = 2,
-        EndDate = 3,
+        StartBlock = 2,
+        EndBlock = 3,
         YesVotes = 4,
         NoVotes = 5,
         Abstains = 6,
@@ -50,8 +50,8 @@ public:
     enum RoleIndex {
         ProposalRole = Qt::UserRole,
         AmountRole,
-        StartDateRole,
-        EndDateRole,
+        StartBlockRole,
+        EndBlockRole,
         YesVotesRole,
         NoVotesRole,
         AbstainsRole,

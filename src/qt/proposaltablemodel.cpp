@@ -78,8 +78,8 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
     bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
-    bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount());
-	bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount());
+    bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
+	bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount()));
     bObj.push_back(pbudgetProposal->IsEstablished());
 
     std::string strError = "";
@@ -165,10 +165,10 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
             return rec->noVotes;
         case Abstains:
             return rec->Abstains;
-        case StartDate:
-            return (QDateTime::fromTime_t((qint32)rec->start_epoch)).date().toString(Qt::SystemLocaleLongDate);
-        case EndDate:
-            return (QDateTime::fromTime_t((qint32)rec->end_epoch)).date().toString(Qt::SystemLocaleLongDate);
+        case StartBlock:
+            return (QDateTime::fromTime_t((qint32)rec->start_block)).date().toString(Qt::SystemLocaleLongDate);
+        case EndBlock:
+            return (QDateTime::fromTime_t((qint32)rec->end_block)).date().toString(Qt::SystemLocaleLongDate);
         case Percentage:
             return QString("%1\%").arg(rec->percentage);
         case Amount:
@@ -180,10 +180,10 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         {
         case Proposal:
             return rec->name;
-        case StartDate:
-            return rec->start_epoch;
-        case EndDate:
-            return rec->end_epoch;
+        case StartBlock:
+            return rec->start_block;
+        case EndBlock:
+            return rec->end_block;
         case YesVotes:
             return rec->yesVotes;
         case NoVotes:
@@ -213,10 +213,10 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         return rec->name;
     case AmountRole:
         return rec->amount;
-    case StartDateRole:
-        return rec->start_epoch;
-    case EndDateRole:
-        return rec->end_epoch;
+    case StartBlockRole:
+        return rec->start_block;
+    case EndBlockRole:
+        return rec->end_block;
     case YesVotesRole:
         return rec->yesVotes;
     case NoVotesRole:
@@ -251,9 +251,9 @@ QVariant ProposalTableModel::headerData(int section, Qt::Orientation orientation
             {
             case Proposal:
                 return tr("Proposal Name");
-            case StartDate:
+            case StartBlock:
                 return tr("Date and time that the proposal starts.");
-            case EndDate:
+            case EndBlock:
                 return tr("Date and time that the proposal ends.");
             case YesVotes:
                 return tr("Obtained yes votes.");

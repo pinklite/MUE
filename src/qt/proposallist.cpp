@@ -68,27 +68,27 @@ ProposalList::ProposalList(   QWidget *parent) :
     amountWidget->setObjectName("amountWidget");
     hlayout->addWidget(amountWidget);
 
-    startDateWidget = new QComboBox(this);
-    startDateWidget->addItem(tr("All"), All);
-    startDateWidget->addItem(tr("Today"), Today);
-    startDateWidget->addItem(tr("This week"), ThisWeek);
-    startDateWidget->addItem(tr("This month"), ThisMonth);
-    startDateWidget->addItem(tr("Last month"), LastMonth);
-    startDateWidget->addItem(tr("This year"), ThisYear);
-    startDateWidget->addItem(tr("Range..."), Range);
-    startDateWidget->setCurrentIndex(settings.value("proposalStartDateIndex").toInt());
-    hlayout->addWidget(startDateWidget);
+    startBlockWidget = new QComboBox(this);
+    startBlockWidget->addItem(tr("All"), All);
+    startBlockWidget->addItem(tr("Today"), Today);
+    startBlockWidget->addItem(tr("This week"), ThisWeek);
+    startBlockWidget->addItem(tr("This month"), ThisMonth);
+    startBlockWidget->addItem(tr("Last month"), LastMonth);
+    startBlockWidget->addItem(tr("This year"), ThisYear);
+    startBlockWidget->addItem(tr("Range..."), Range);
+    startBlockWidget->setCurrentIndex(settings.value("proposalStartBlockIndex").toInt());
+    hlayout->addWidget(startBlockWidget);
 
-    endDateWidget = new QComboBox(this);
-    endDateWidget->addItem(tr("All"), All);
-    endDateWidget->addItem(tr("Today"), Today);
-    endDateWidget->addItem(tr("This week"), ThisWeek);
-    endDateWidget->addItem(tr("This month"), ThisMonth);
-    endDateWidget->addItem(tr("Last month"), LastMonth);
-    endDateWidget->addItem(tr("This year"), ThisYear);
-    endDateWidget->addItem(tr("Range..."), Range);
-    endDateWidget->setCurrentIndex(settings.value("proposalEndDateIndex").toInt());
-    hlayout->addWidget(endDateWidget);
+    endBlockWidget = new QComboBox(this);
+    endBlockWidget->addItem(tr("All"), All);
+    endBlockWidget->addItem(tr("Today"), Today);
+    endBlockWidget->addItem(tr("This week"), ThisWeek);
+    endBlockWidget->addItem(tr("This month"), ThisMonth);
+    endBlockWidget->addItem(tr("Last month"), LastMonth);
+    endBlockWidget->addItem(tr("This year"), ThisYear);
+    endBlockWidget->addItem(tr("Range..."), Range);
+    endBlockWidget->setCurrentIndex(settings.value("proposalEndBlockIndex").toInt());
+    hlayout->addWidget(endBlockWidget);
 
     yesVotesWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
@@ -128,8 +128,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);
-    vlayout->addWidget(createStartDateRangeWidget());
-    vlayout->addWidget(createEndDateRangeWidget());
+    vlayout->addWidget(createStartBlockRangeWidget());
+    vlayout->addWidget(createEndBlockRangeWidget());
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
@@ -185,8 +185,8 @@ ProposalList::ProposalList(   QWidget *parent) :
     connect(voteNoButton, SIGNAL(clicked()), this, SLOT(voteNo()));
 
     connect(proposalWidget, SIGNAL(textChanged(QString)), this, SLOT(changedProposal(QString)));
-    connect(startDateWidget, SIGNAL(activated(int)), this, SLOT(chooseStartDate(int)));
-    connect(endDateWidget, SIGNAL(activated(int)), this, SLOT(chooseEndDate(int)));
+    connect(startBlockWidget, SIGNAL(activated(int)), this, SLOT(chooseStartBlock(int)));
+    connect(endBlockWidget, SIGNAL(activated(int)), this, SLOT(chooseEndBlock(int)));
     connect(yesVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedYesVotes(QString)));
     connect(noVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedNoVotes(QString)));
     connect(AbstainsWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAbstains(QString)));
@@ -216,12 +216,12 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->setAlternatingRowColors(true);
     proposalList->setSelectionBehavior(QAbstractItemView::SelectRows);
     proposalList->setSortingEnabled(true);
-    proposalList->sortByColumn(ProposalTableModel::StartDate, Qt::DescendingOrder);
+    proposalList->sortByColumn(ProposalTableModel::StartBlock, Qt::DescendingOrder);
     proposalList->verticalHeader()->hide();
 
     proposalList->setColumnWidth(ProposalTableModel::Proposal, PROPOSAL_COLUMN_WIDTH);
-    proposalList->setColumnWidth(ProposalTableModel::StartDate, START_DATE_COLUMN_WIDTH);
-    proposalList->setColumnWidth(ProposalTableModel::EndDate, END_DATE_COLUMN_WIDTH);
+    proposalList->setColumnWidth(ProposalTableModel::StartBlock, START_DATE_COLUMN_WIDTH);
+    proposalList->setColumnWidth(ProposalTableModel::EndBlock, END_DATE_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::YesVotes, YES_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::NoVotes, NO_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Abstains, ABSOLUTE_YES_COLUMN_WIDTH);
@@ -232,8 +232,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 	
     columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
         
-    chooseStartDate(settings.value("proposalStartDate").toInt());
-    chooseEndDate(settings.value("proposalEndDate").toInt());
+    chooseStartBlock(settings.value("proposalStartBlock").toInt());
+    chooseEndBlock(settings.value("proposalEndBlock").toInt());
 
     nLastUpdate = GetTime();
 
@@ -262,98 +262,14 @@ void ProposalList::refreshProposals(bool force) {
     secondsLabel->setText(tr("List will be updated in 0 second(s)"));
 }
 
-void ProposalList::chooseStartDate(int idx)
+void ProposalList::chooseStartBlock(int idx)
 {
-    if(!proposalProxyModel)
-        return;
-    
-    QSettings settings;
-    QDate current = QDate::currentDate();
-    startDateRangeWidget->setVisible(false);
-    switch(startDateWidget->itemData(idx).toInt())
-    {
-    case All:
-        proposalProxyModel->setProposalStart(
-                ProposalFilterProxy::MIN_DATE);
-        break;
-    case Today:
-        proposalProxyModel->setProposalStart(
-                QDateTime(current));
-        break;
-    case ThisWeek: {
-        QDate startOfWeek = current.addDays(-(current.dayOfWeek()-1));
-        proposalProxyModel->setProposalStart(
-                QDateTime(startOfWeek));
 
-        } break;
-    case ThisMonth:
-        proposalProxyModel->setProposalStart(
-                QDateTime(QDate(current.year(), current.month(), 1)));
-        break;
-    case LastMonth:
-        proposalProxyModel->setProposalStart(
-                QDateTime(QDate(current.year(), current.month(), 1).addMonths(-1)));
-        break;
-    case ThisYear:
-        proposalProxyModel->setProposalStart(
-                QDateTime(QDate(current.year(), 1, 1)));
-        break;
-    case Range:
-        startDateRangeWidget->setVisible(true);
-        startDateRangeChanged();
-        break;
-    }
-    
-    settings.setValue("proposalStartDateIndex", idx);
-    if (startDateWidget->itemData(idx).toInt() == Range)
-        settings.setValue("proposalStartDate", proposalStartDate->date().toString(PERSISTENCE_DATE_FORMAT));
 }
 
-void ProposalList::chooseEndDate(int idx)
+void ProposalList::chooseEndBlock(int idx)
 {
-    if(!proposalProxyModel)
-        return;
-    
-    QSettings settings;
-    QDate current = QDate::currentDate();
-    endDateRangeWidget->setVisible(false);
-    switch(endDateWidget->itemData(idx).toInt())
-    {
-    case All:
-        proposalProxyModel->setProposalEnd(
-                ProposalFilterProxy::MAX_DATE);
-        break;
-    case Today:
-        proposalProxyModel->setProposalEnd(
-                QDateTime(current));
-        break;
-    case ThisWeek: {
-        QDate startOfWeek = current.addDays(-(current.dayOfWeek()-1));
-        proposalProxyModel->setProposalEnd(
-                QDateTime(startOfWeek));
 
-        } break;
-    case ThisMonth:
-        proposalProxyModel->setProposalEnd(
-                QDateTime(QDate(current.year(), current.month(), 1)));
-        break;
-    case LastMonth:
-        proposalProxyModel->setProposalEnd(
-                QDateTime(QDate(current.year(), current.month(), 1).addMonths(-1)));
-        break;
-    case ThisYear:
-        proposalProxyModel->setProposalEnd(
-                QDateTime(QDate(current.year(), 1, 1)));
-        break;
-    case Range:
-        endDateRangeWidget->setVisible(true);
-        endDateRangeChanged();
-        break;
-    }
-    
-    settings.setValue("proposalEndDateIndex", idx);
-    if (endDateWidget->itemData(idx).toInt() == Range)
-        settings.setValue("proposalEndDate", proposalEndDate->date().toString(PERSISTENCE_DATE_FORMAT));
 }
 
 
@@ -536,86 +452,86 @@ void ProposalList::openProposalUrl()
          QDesktopServices::openUrl(selection.at(0).data(ProposalTableModel::ProposalUrlRole).toString());
 }
 
-QWidget *ProposalList::createStartDateRangeWidget()
+QWidget *ProposalList::createStartBlockRangeWidget()
 {
     QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
     QSettings settings;
  
-    startDateRangeWidget = new QFrame();
-    startDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
-    startDateRangeWidget->setContentsMargins(1,1,1,1);
-    QHBoxLayout *layout = new QHBoxLayout(startDateRangeWidget);
+    startBlockRangeWidget = new QFrame();
+    startBlockRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    startBlockRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(startBlockRangeWidget);
     layout->setContentsMargins(0,0,0,0);
     layout->addSpacing(23);
     layout->addWidget(new QLabel(tr("Start Date:")));
 
-    proposalStartDate = new QDateTimeEdit(this);
-    proposalStartDate->setCalendarPopup(true);
-    proposalStartDate->setMinimumWidth(100);
+    proposalStartBlock = new QDateTimeEdit(this);
+    proposalStartBlock->setCalendarPopup(true);
+    proposalStartBlock->setMinimumWidth(100);
 
-    proposalStartDate->setDate(QDate::fromString(settings.value("proposalStartDate", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
+    proposalStartBlock->setDate(QDate::fromString(settings.value("proposalStartBlock", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
 
-    layout->addWidget(proposalStartDate);
+    layout->addWidget(proposalStartBlock);
     layout->addStretch();
 
-    startDateRangeWidget->setVisible(false);
+    startBlockRangeWidget->setVisible(false);
 
-    connect(proposalStartDate, SIGNAL(dateChanged(QDate)), this, SLOT(startDateRangeChanged()));
+    connect(proposalStartBlock, SIGNAL(dateChanged(QDate)), this, SLOT(startBlockRangeChanged()));
 
-    return startDateRangeWidget;
+    return startBlockRangeWidget;
 }
 
-QWidget *ProposalList::createEndDateRangeWidget()
+QWidget *ProposalList::createEndBlockRangeWidget()
 {
     QString defaultDate = QDate::currentDate().toString(PERSISTENCE_DATE_FORMAT);
     QSettings settings;
  
-    endDateRangeWidget = new QFrame();
-    endDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
-    endDateRangeWidget->setContentsMargins(1,1,1,1);
-    QHBoxLayout *layout = new QHBoxLayout(endDateRangeWidget);
+    endBlockRangeWidget = new QFrame();
+    endBlockRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    endBlockRangeWidget->setContentsMargins(1,1,1,1);
+    QHBoxLayout *layout = new QHBoxLayout(endBlockRangeWidget);
     layout->setContentsMargins(0,0,0,0);
     layout->addSpacing(23);
     layout->addWidget(new QLabel(tr("End Date:")));
 
-    proposalEndDate = new QDateTimeEdit(this);
-    proposalEndDate->setCalendarPopup(true);
-    proposalEndDate->setMinimumWidth(100);
+    proposalEndBlock = new QDateTimeEdit(this);
+    proposalEndBlock->setCalendarPopup(true);
+    proposalEndBlock->setMinimumWidth(100);
 
-    proposalEndDate->setDate(QDate::fromString(settings.value("proposlEndDate", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
+    proposalEndBlock->setDate(QDate::fromString(settings.value("proposlEndBlock", defaultDate).toString(), PERSISTENCE_DATE_FORMAT));
 
-    layout->addWidget(proposalEndDate);
+    layout->addWidget(proposalEndBlock);
     layout->addStretch();
 
-    endDateRangeWidget->setVisible(false);
+    endBlockRangeWidget->setVisible(false);
 
-    connect(proposalEndDate, SIGNAL(dateChanged(QDate)), this, SLOT(endDateRangeChanged()));
+    connect(proposalEndBlock, SIGNAL(dateChanged(QDate)), this, SLOT(endBlockRangeChanged()));
 
-    return endDateRangeWidget;
+    return endBlockRangeWidget;
 }
 
-void ProposalList::startDateRangeChanged()
+void ProposalList::startBlockRangeChanged()
 {
     if(!proposalProxyModel)
         return;
     
     QSettings settings;
-    settings.setValue("proposalStartDate", proposalStartDate->date().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalStartBlock", proposalStartBlock->date().toString(PERSISTENCE_DATE_FORMAT));
     
     proposalProxyModel->setProposalStart(
-            QDateTime(proposalStartDate->date()));
+            QDateTime(proposalStartBlock->date()));
 }
 
-void ProposalList::endDateRangeChanged()
+void ProposalList::endBlockRangeChanged()
 {
     if(!proposalProxyModel)
         return;
     
     QSettings settings;
-    settings.setValue("proposalEndDate", proposalEndDate->date().toString(PERSISTENCE_DATE_FORMAT));
+    settings.setValue("proposalEndBlock", proposalEndBlock->date().toString(PERSISTENCE_DATE_FORMAT));
     
     proposalProxyModel->setProposalEnd(
-            QDateTime(proposalEndDate->date()));
+            QDateTime(proposalEndBlock->date()));
 }
 
 void ProposalList::resizeEvent(QResizeEvent* event)
