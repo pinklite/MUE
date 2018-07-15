@@ -87,8 +87,8 @@ private:
     QDateTimeEdit *proposalEndDate;
     ColumnAlignedLayout *hlayout;
 
-    QWidget *createStartDateRangeWidget();
-    QWidget *createEndDateRangeWidget();
+    //QWidget *createStartDateRangeWidget();
+    //QWidget *createEndDateRangeWidget();
     void vote_click_handler(const std::string voteString);
 
     GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;

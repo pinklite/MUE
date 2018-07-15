@@ -100,6 +100,29 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
+    startDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    startDateRangeWidget->setPlaceholderText(tr("Start Block"));
+#endif
+    startDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    startDateRangeWidget->setObjectName("startDateRangeWidget");
+    hlayout->addWidget(proposalStartDate);
+
+    endDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    endDateRangeWidget->setPlaceholderText(tr("End Block"));
+#endif
+    endDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    endDateRangeWidget->setObjectName("endDateRangeWidget");
+    hlayout->addWidget(proposalEndDate);
+
+
+
+
+
+
+
+
 	
 	
     QVBoxLayout *vlayout = new QVBoxLayout(this);
@@ -107,8 +130,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);
-    vlayout->addWidget(createStartDateRangeWidget());
-    vlayout->addWidget(createEndDateRangeWidget());
+    //vlayout->addWidget(createStartDateRangeWidget());
+    //vlayout->addWidget(createEndDateRangeWidget());
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
@@ -435,7 +458,7 @@ void ProposalList::openProposalUrl()
     if(!selection.isEmpty())
          QDesktopServices::openUrl(selection.at(0).data(ProposalTableModel::ProposalUrlRole).toString());
 }
-
+/*
 QWidget *ProposalList::createStartDateRangeWidget()
 {
 
@@ -511,6 +534,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
 
     return endDateRangeWidget;
 }
+*/
 /*
 void ProposalList::startDateRangeChanged()
 {
