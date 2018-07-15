@@ -561,5 +561,5 @@ void ProposalList::endDateRangeChanged()
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    GUIUtil::TableViewLastColumnResizingFixer::stretchColumnWidth(0);
+    TableViewLastColumnResizingFixer::stretchColumnWidth(ProposalTableModel::Proposal);
 }
