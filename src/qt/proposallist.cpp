@@ -128,8 +128,8 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);
-    vlayout->addWidget(createStartBlockRangeWidget());
-    vlayout->addWidget(createEndBlockRangeWidget());
+    vlayout->addWidget(createStartBlockRangeWidget);
+    vlayout->addWidget(createEndBlockRangeWidget);
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
