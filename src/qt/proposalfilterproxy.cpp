@@ -38,9 +38,9 @@ bool ProposalFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sou
     int Abstains = index.data(ProposalTableModel::AbstainsRole).toInt();
     int percentage = index.data(ProposalTableModel::PercentageRole).toInt();
 
-    if(proposalStartDate < (startDate.toMSecsSinceEpoch() / 1000))
+    if(proposalStartDate < startDate)
        return false;
-    if(proposalEndDate > (endDate.toMSecsSinceEpoch() / 1000))
+    if(proposalEndDate < endDate)
        return false;
     if(!propName.contains(proposalName, Qt::CaseInsensitive))
         return false;
