@@ -70,7 +70,7 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back(pbudgetProposal->GetURL());
     bObj.push_back(pbudgetProposal->GetHash().ToString());
     bObj.push_back(pbudgetProposal->nFeeTXHash.ToString());
-    bObj.push_back(Pair("BlockStart", (int64_t)pbudgetProposal->GetBlockStart()))
+    bObj.push_back(Pair("BlockStart", (int64_t)pbudgetProposal->GetBlockStart()));
     bObj.push_back(Pair("BlockEnd", (int64_t)pbudgetProposal->GetBlockEnd()));
     bObj.push_back((int64_t)pbudgetProposal->GetTotalPaymentCount());
     bObj.push_back((int64_t)pbudgetProposal->GetRemainingPaymentCount());
