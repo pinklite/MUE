@@ -233,7 +233,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, ABSTAIN_COLUMN_WIDTH, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
+    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, ABSTAIN_COLUMN_WIDTH, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
         
 
 
