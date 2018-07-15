@@ -489,13 +489,13 @@ QWidget *ProposalList::createStartDateRangeWidget()
     layout->addWidget(proposalStartDate);
     layout->addStretch();
 
-    startDateRangeWidget->setVisible(false); */
+    startDateRangeWidget->setVisible(false); 
 
 
 
     return startDateRangeWidget;
 }
-/*
+
 QWidget *ProposalList::createEndDateRangeWidget()
 {
 
