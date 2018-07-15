@@ -134,7 +134,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     hlayout->addWidget(endDateRangeWidget);		
 	
 	
-    /*vlayout->addWidget(view);
+    vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
     hlayout->addSpacing(width);
@@ -145,7 +145,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view->setTabKeyNavigation(false);
-    view->setContextMenuPolicy(Qt::CustomContextMenu); */
+    view->setContextMenuPolicy(Qt::CustomContextMenu);
 
     proposalList = view;
 
