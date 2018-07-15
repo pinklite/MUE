@@ -113,8 +113,8 @@ ProposalList::ProposalList(   QWidget *parent) :
     hlayout->addSpacing(width);
     hlayout->setTableColumnsToTrack(view->horizontalHeader());
 
-    //connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
-    //connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
+    connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
+    connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
 
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view->setTabKeyNavigation(false);
@@ -436,8 +436,16 @@ void ProposalList::openProposalUrl()
 
 QWidget *ProposalList::createStartDateRangeWidget()
 {
-    QString defaultDate = QDate::currentDate().toString();
-    QSettings settings;
+
+    startDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    startDateRangeWidget->setPlaceholderText(tr("Start Block"));
+#endif
+    startDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    startDateRangeWidget->setObjectName("startDateRangeWidget");
+    layout->addWidget(proposalStartDate);
+
+    /*QSettings settings;
  
     startDateRangeWidget = new QFrame();
     startDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -456,7 +464,7 @@ QWidget *ProposalList::createStartDateRangeWidget()
     layout->addWidget(proposalStartDate);
     layout->addStretch();
 
-    startDateRangeWidget->setVisible(false);
+    startDateRangeWidget->setVisible(false); */
 
 
 
@@ -466,7 +474,17 @@ QWidget *ProposalList::createStartDateRangeWidget()
 QWidget *ProposalList::createEndDateRangeWidget()
 {
 
-    QSettings settings;
+
+    endDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    endDateRangeWidget->setPlaceholderText(tr("End Block"));
+#endif
+    endDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    endDateRangeWidget->setObjectName("endDateRangeWidget");
+    layout->addWidget(proposalEndDate);
+	
+	
+    /*QSettings settings;
  
     endDateRangeWidget = new QFrame();
     endDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -485,7 +503,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
     layout->addWidget(proposalEndDate);
     layout->addStretch();
 
-    endDateRangeWidget->setVisible(false);
+    endDateRangeWidget->setVisible(false); */
 
 
 
