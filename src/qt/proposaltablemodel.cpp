@@ -92,7 +92,6 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back((int64_t)pbudgetProposal->GetTotalPaymentCount());
     bObj.push_back((int64_t)pbudgetProposal->GetRemainingPaymentCount());
     bObj.push_back(EncodeDestination(address));
-    bObj.push_back(pbudgetProposal->GetRatio());
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
     bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
