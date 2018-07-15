@@ -117,21 +117,22 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
-    createStartDateRangeWidget = new QLineEdit(this);
+    startDateRangeWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    createStartDateRangeWidget->setPlaceholderText(tr("Min percentage"));
+    startDateRangeWidget->setPlaceholderText(tr("Min percentage"));
 #endif
-    createStartDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
-    createStartDateRangeWidget->setObjectName("createStartDateRangeWidget");
-    hlayout->addWidget(createStartDateRangeWidget);	
+    startDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
+    startDateRangeWidget->setObjectName("startDateRangeWidget");
+    hlayout->addWidget(startDateRangeWidget);	
 	
-    createEndDateRangeWidget = new QLineEdit(this);
+    endDateRangeWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    createEndDateRangeWidget->setPlaceholderText(tr("Min percentage"));
+    endDateRangeWidget->setPlaceholderText(tr("Min percentage"));
 #endif
-    createEndDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
-    createEndDateRangeWidget->setObjectName("createEndDateRangeWidget");
-    hlayout->addWidget(createEndDateRangeWidget);		
+    endDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
+    endDateRangeWidget->setObjectName("endDateRangeWidget");
+    hlayout->addWidget(endDateRangeWidget);		
+	
     connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
     connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
 
