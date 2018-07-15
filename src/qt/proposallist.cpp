@@ -291,6 +291,22 @@ void ProposalList::changedPercentage(const QString &minPercentage)
     proposalProxyModel->setMinPercentage(value);
 }
 
+void ProposalList::chooseStartDate(const QString &startDate)
+{
+    if(!proposalProxyModel)
+        return;
+
+    proposalProxyModel->setMinAmount(startDate.toInt());
+}
+
+void ProposalList::chooseEndDate(const QString &endDate)
+{
+    if(!proposalProxyModel)
+        return;
+
+    proposalProxyModel->setMinAmount(endDate.toInt());
+}
+
 void ProposalList::changedProposal(const QString &proposal)
 {
     if(!proposalProxyModel)
