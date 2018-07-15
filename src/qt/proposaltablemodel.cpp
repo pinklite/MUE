@@ -70,16 +70,16 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back(pbudgetProposal->GetURL());
     bObj.push_back(pbudgetProposal->GetHash().ToString());
     bObj.push_back(pbudgetProposal->nFeeTXHash.ToString());
-    bObj.push_back((int64_t)pbudgetProposal->GetBlockStart());
-    bObj.push_back((int64_t)pbudgetProposal->GetBlockEnd());
+    bObj.push_back(Pair("BlockStart", (int64_t)pbudgetProposal->GetBlockStart()))
+    bObj.push_back(Pair("BlockEnd", (int64_t)pbudgetProposal->GetBlockEnd()));
     bObj.push_back((int64_t)pbudgetProposal->GetTotalPaymentCount());
     bObj.push_back((int64_t)pbudgetProposal->GetRemainingPaymentCount());
     bObj.push_back(EncodeDestination(address));
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
     bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
-    bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
-    bObj.push_back(pbudgetProposal->GetAmount());
+    bObj.push_back(Pair("TotalPayment", ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount())));
+    bObj.push_back(Pair("MonthlyPayment", ValueFromAmount(pbudgetProposal->GetAmount())));
     bObj.push_back(pbudgetProposal->IsEstablished());
 
     std::string strError = "";
