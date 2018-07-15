@@ -290,6 +290,22 @@ void ProposalList::changedYesVotes(const QString &minYesVotes)
     proposalProxyModel->setMinYesVotes(minYesVotes.toInt());
 }
 
+void ProposalList::chooseStartDate(const QString &startDate)
+{
+    if(!proposalProxyModel)
+        return;
+
+    proposalProxyModel->setMinYesVotes(startDate.toInt());
+}
+
+void ProposalList::chooseEndDate(const QString &endDate)
+{
+    if(!proposalProxyModel)
+        return;
+
+    proposalProxyModel->setMinYesVotes(endDate.toInt());
+}
+
 void ProposalList::changedNoVotes(const QString &minNoVotes)
 {
     if(!proposalProxyModel)
