@@ -495,7 +495,7 @@ QWidget *ProposalList::createStartDateRangeWidget()
 
     return startDateRangeWidget;
 }
-
+/*
 QWidget *ProposalList::createEndDateRangeWidget()
 {
 
@@ -509,7 +509,7 @@ QWidget *ProposalList::createEndDateRangeWidget()
     hlayout->addWidget(proposalEndDate);
 	
 	
-    /*QSettings settings;
+    QSettings settings;
  
     endDateRangeWidget = new QFrame();
     endDateRangeWidget->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -528,14 +528,14 @@ QWidget *ProposalList::createEndDateRangeWidget()
     layout->addWidget(proposalEndDate);
     layout->addStretch();
 
-    endDateRangeWidget->setVisible(false); */
+    endDateRangeWidget->setVisible(false); 
 
 
 
     return endDateRangeWidget;
 }
-*/
-/*
+
+
 void ProposalList::startDateRangeChanged()
 {
     if(!proposalProxyModel)
