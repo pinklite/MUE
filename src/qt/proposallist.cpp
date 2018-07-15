@@ -329,7 +329,7 @@ void ProposalList::changedAbstainVotes(const QString &minAbstainVotes)
     if(!proposalProxyModel)
         return;
 
-    int value = minAbstainVotes == "" ? INT_MIN : minAbstainsVotes.toInt();
+    int value = minAbstainVotes == "" ? INT_MIN : minAbstainVotes.toInt();
 
     proposalProxyModel->setMinAbstainsVotes(value);
 }
