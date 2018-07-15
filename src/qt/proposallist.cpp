@@ -100,20 +100,20 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
-    startDateRangeWidget = new QLineEdit(this);
+    proposalStartDate = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    startDateRangeWidget->setPlaceholderText(tr("Start Block"));
+    proposalStartDate->setPlaceholderText(tr("Start Block"));
 #endif
-    startDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
-    startDateRangeWidget->setObjectName("startDateRangeWidget");
+    proposalStartDate->setValidator(new QIntValidator(0, INT_MAX, this));
+    proposalStartDate->setObjectName("proposalStartDate");
     hlayout->addWidget(proposalStartDate);
 
-    endDateRangeWidget = new QLineEdit(this);
+    proposalEndDate = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    endDateRangeWidget->setPlaceholderText(tr("End Block"));
+    proposalEndDate->setPlaceholderText(tr("End Block"));
 #endif
-    endDateRangeWidget->setValidator(new QIntValidator(0, INT_MAX, this));
-    endDateRangeWidget->setObjectName("endDateRangeWidget");
+    proposalEndDate->setValidator(new QIntValidator(0, INT_MAX, this));
+    proposalEndDate->setObjectName("proposalEndDate");
     hlayout->addWidget(proposalEndDate);
 
 

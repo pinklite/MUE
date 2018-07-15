@@ -80,11 +80,11 @@ private:
 
     QMenu *contextMenu;
 
-    QLineEdit *startDateRangeWidget;
-    QDateTimeEdit *proposalStartDate;
+    //LineEdit *startDateRangeWidget;
+    QLineEdit *proposalStartDate;
 
-    QLineEdit *endDateRangeWidget;
-    QDateTimeEdit *proposalEndDate;
+    //QLineEdit *endDateRangeWidget;
+    QLineEdit *proposalEndDate;
     ColumnAlignedLayout *hlayout;
 
     //QWidget *createStartDateRangeWidget();
