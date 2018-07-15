@@ -116,30 +116,46 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setValidator(new QIntValidator(-100, 100, this));
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
-	
+	/*
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setSpacing(0);
 
     QTableView *view = new QTableView(this);
-    vlayout->addLayout(hlayout);
-    vlayout->addWidget(startDateRangeWidget);
-    vlayout->addWidget(endDateRangeWidget);
+    vlayout->addLayout(hlayout);	*/
+	
+	
+    startDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    startDateRangeWidget->setPlaceholderText(tr("Min percentage"));
+#endif
+    startDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
+    startDateRangeWidget->setObjectName("startDateRangeWidget");
+    vlayout->addWidget(startDateRangeWidget);	
+	
+    endDateRangeWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    endDateRangeWidget->setPlaceholderText(tr("Min percentage"));
+#endif
+    endDateRangeWidget->setValidator(new QIntValidator(-100, 100, this));
+    endDateRangeWidget->setObjectName("endDateRangeWidget");
+    vlayout->addWidget(endDateRangeWidget);		
+	
+	/*
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
     hlayout->addSpacing(width);
-    hlayout->setTableColumnsToTrack(view->horizontalHeader());
-
+    hlayout->setTableColumnsToTrack(view->horizontalHeader());	
+	
     connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
     connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
 
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     view->setTabKeyNavigation(false);
-    view->setContextMenuPolicy(Qt::CustomContextMenu);
+    view->setContextMenuPolicy(Qt::CustomContextMenu); 
 
-    proposalList = view;	
-	
-	
+    proposalList = view; */
+
     QHBoxLayout *actionBar = new QHBoxLayout();
     actionBar->setSpacing(11);
     actionBar->setContentsMargins(0,20,0,20);
