@@ -233,7 +233,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer stretchColumnWidth(ProposalTableModel::Proposal);
+    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer stretchColumnWidth(ProposalTableModel::Proposal);
         
 
 
@@ -557,9 +557,16 @@ void ProposalList::endDateRangeChanged()
     
     proposalProxyModel->setProposalEnd(endDate.toInt());
 }	*/
+// Make column use all the space available, useful during window resizing.
+void TableViewLastColumnResizingFixer::stretchColumnWidth
+{
+    disconnectViewHeadersSignals();
+    resizeColumn(column, getAvailableWidthForColumn(column));
+    connectViewHeadersSignals();
+}
 
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    columnResizingFixer;
+    TableViewLastColumnResizingFixer.stretchColumnWidth(ProposalTableModel::Proposal);
 }
