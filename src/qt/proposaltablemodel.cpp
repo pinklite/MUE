@@ -77,9 +77,9 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back(EncodeDestination(address));
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
-    bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
+    bObj.push_back(pbudgetProposal->GetAbstains());
     bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
-	bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount()));
+	bObj.push_back((int64_t)pbudgetProposal->GetAmount());
     bObj.push_back(pbudgetProposal->IsEstablished());
 
     std::string strError = "";
@@ -114,8 +114,7 @@ void ProposalTableModel::refreshProposals() {
         int percentage = 0;
 		
         if(mnCount > 0) percentage = round(pbudgetProposal->GetYeas() * 100 / mnCount);
-        int amount = 0;
-		amount = round(pbudgetProposal->GetAmount());
+
 		
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
@@ -126,7 +125,7 @@ void ProposalTableModel::refreshProposals() {
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        amount,
+                        pbudgetProposal->GetAmount(),
                         percentage));
     }
     endResetModel();
