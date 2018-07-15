@@ -14,8 +14,8 @@
 
 ProposalFilterProxy::ProposalFilterProxy(QObject *parent) :
     QSortFilterProxyModel(parent),
-    startDate(MIN_DATE),
-    endDate(MAX_DATE),
+    startDate(INT_MIN),
+    endDate(INT_MIN),
     proposalName(),
     minAmount(0),
     minPercentage(-100),
