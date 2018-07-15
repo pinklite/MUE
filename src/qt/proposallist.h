@@ -92,7 +92,7 @@ private:
 
     //GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
 
-    virtual void resizeEvent(QResizeEvent* event);
+    //virtual void resizeEvent(QResizeEvent* event);
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);

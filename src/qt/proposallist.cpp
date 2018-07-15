@@ -557,9 +557,10 @@ void ProposalList::endDateRangeChanged()
     
     proposalProxyModel->setProposalEnd(endDate.toInt());
 }	*/
-
+/*
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
     columnResizingFixer->stretchColumnWidth(ProposalTableModel::Proposal);
 }
+*/
