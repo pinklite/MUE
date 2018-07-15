@@ -67,8 +67,8 @@ private:
     int64_t nLastUpdate = 0;
 
     QLineEdit *proposalWidget;
-    QComboBox *startDateWidget;
-    QComboBox *endDateWidget;
+    QLineEdit *startDateWidget;
+    QLineEdit *endDateWidget;
     QTimer *timer;
 
     QLineEdit *yesVotesWidget;
