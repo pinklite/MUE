@@ -233,7 +233,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PROPOSAL_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH );
+    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer->stretchColumnWidth(ProposalTableModel::Proposal);
         
 
 
@@ -561,5 +561,5 @@ void ProposalList::endDateRangeChanged()
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    columnResizingFixer->stretchColumnWidth(ProposalTableModel::Proposal);
+    columnResizingFixer;
 }
