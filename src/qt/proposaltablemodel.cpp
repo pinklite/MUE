@@ -59,27 +59,76 @@ ProposalTableModel::~ProposalTableModel()
 {
 }
 
+std::vector<CBudgetProposal*> CBudgetManager::GetAllProposals()
+{
+    LOCK(cs);
+
+    std::vector<CBudgetProposal*> vBudgetProposalRet;
+
+    std::map<uint256, CBudgetProposal>::iterator it = mapProposals.begin();
+    while (it != mapProposals.end()) {
+        (*it).second.CleanAndRemove(false);
+
+        CBudgetProposal* pbudgetProposal = &((*it).second);
+        vBudgetProposalRet.push_back(pbudgetProposal);
+
+        ++it;
+    }
+
+    return vBudgetProposalRet;
+}
+
+void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
+{
+    CTxDestination address;
+    ExtractDestination(pbudgetProposal->GetPayee(), address);
+
+    bObj.push_back(pbudgetProposal->GetName());
+    bObj.push_back(pbudgetProposal->GetURL());
+    bObj.push_back(pbudgetProposal->GetHash().ToString());
+    bObj.push_back(pbudgetProposal->nFeeTXHash.ToString());
+    bObj.push_back((int64_t)pbudgetProposal->GetBlockStart());
+    bObj.push_back((int64_t)pbudgetProposal->GetBlockEnd());
+    bObj.push_back((int64_t)pbudgetProposal->GetTotalPaymentCount());
+    bObj.push_back((int64_t)pbudgetProposal->GetRemainingPaymentCount());
+    bObj.push_back(EncodeDestination(address));
+    bObj.push_back(pbudgetProposal->GetRatio());
+    bObj.push_back((int64_t)pbudgetProposal->GetYeas());
+    bObj.push_back((int64_t)pbudgetProposal->GetNays());
+    bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
+    bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
+    bObj.push_back(pbudgetProposal->GetAmount());
+    bObj.push_back(pbudgetProposal->IsEstablished());
+
+    std::string strError = "";
+    bObj.push_back(Pair("IsValid", pbudgetProposal->IsValid(strError)));
+    bObj.push_back(Pair("IsValidReason", strError.c_str()));
+    bObj.push_back(Pair("fValid", pbudgetProposal->fValid));
+}
+
 void ProposalTableModel::refreshProposals() {
     beginResetModel();
     proposalRecords.clear();
 
     int mnCount = mnodeman.CountEnabled();
+    std::vector<CBudgetProposal*> bObj = budget.GetAllProposals();
 
-    std::vector<CBudgetProposal*> winningProps = GetAllProposals();
-
-
-    for (CBudgetProposal* pbudgetProposal : winningProps)
+    UniValue bObj(UniValue::VOBJ);
+    budgetToST(pbudgetProposal, bObj);	
+    for (CBudgetProposal* pbudgetProposal : bObj)
     {
         //if(CBudgetProposal::CBudgetProposal() != GOVERNANCE_OBJECT_PROPOSAL) continue;
 
-        UniValue objResult(UniValue::VOBJ);
-        UniValue dataObj(UniValue::VOBJ);
-        //objResult.read(pGovObj->GetDataAsPlainString()); // not need as time being
+        //UniValue objResult(UniValue::VOBJ);
+        //UniValue dataObj(UniValue::VOBJ);
+        //objResult.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
 
-        std::vector<UniValue> arr1 = objResult.getValues();
-        std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
-        dataObj = arr2.at( 1 );
+        //std::vector<UniValue> arr1 = objResult.getValues();
+        //std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
+        //dataObj = arr2.at( 1 );
 
+	
+		
         int percentage = 0;
 		
         if(mnCount > 0) percentage = round(pbudgetProposal->GetYeas() * 100 / mnCount);
