@@ -147,7 +147,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     view->setTabKeyNavigation(false);
     view->setContextMenuPolicy(Qt::CustomContextMenu); */
 
-    //proposalList = view;
+    proposalList = view;
 
     QHBoxLayout *actionBar = new QHBoxLayout();
     actionBar->setSpacing(11);
