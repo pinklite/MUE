@@ -21,7 +21,7 @@ ProposalFilterProxy::ProposalFilterProxy(QObject *parent) :
     minPercentage(-100),
     minYesVotes(0),
     minNoVotes(0),
-    minAbstainVotes(INT_MIN)
+    minAbstainVotes(0)
 {
 }
 
