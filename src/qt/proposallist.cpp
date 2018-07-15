@@ -133,6 +133,13 @@ ProposalList::ProposalList(   QWidget *parent) :
     endDateRangeWidget->setObjectName("endDateRangeWidget");
     hlayout->addWidget(endDateRangeWidget);		
 	
+	
+    vlayout->addWidget(view);
+    vlayout->setSpacing(0);
+    int width = view->verticalScrollBar()->sizeHint().width();
+    hlayout->addSpacing(width);
+    hlayout->setTableColumnsToTrack(view->horizontalHeader());	
+	
     connect(view->horizontalHeader(), SIGNAL(sectionResized(int,int,int)), SLOT(invalidateAlignedLayout()));
     connect(view->horizontalScrollBar(), SIGNAL(valueChanged(int)), SLOT(invalidateAlignedLayout()));
 
