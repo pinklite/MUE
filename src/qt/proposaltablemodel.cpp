@@ -114,8 +114,9 @@ void ProposalTableModel::refreshProposals() {
         int percentage = 0;
 		
         if(mnCount > 0) percentage = round(pbudgetProposal->GetYeas() * 100 / mnCount);
-        int amount = 0;
+        float amount = 0;
 		amount = ValueFromAmount(pbudgetProposal->GetAmount().toInt() * pbudgetProposal->GetTotalPaymentCount().toInt());
+		int amount2 = (int)round(amount);
 		
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
@@ -126,7 +127,7 @@ void ProposalTableModel::refreshProposals() {
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        amount,
+                        amount2,
                         percentage));
     }
     endResetModel();
