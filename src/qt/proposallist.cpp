@@ -109,7 +109,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     AbstainsWidget = new QLineEdit(this);
 #if QT_VERSION >= 0x040700
-    AbstainsWidget->setPlaceholderText(tr("Min abs. yes votes"));
+    AbstainsWidget->setPlaceholderText(tr("Min abstain votes"));
 #endif
     AbstainsWidget->setValidator(new QIntValidator(INT_MIN, INT_MAX, this));
     AbstainsWidget->setObjectName("AbstainsWidget");

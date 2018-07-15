@@ -46,7 +46,7 @@ ProposalTableModel::ProposalTableModel( QObject *parent):
         QAbstractTableModel(parent)
 
 {
-    columns << tr("Proposal") << tr("Amount") << tr("Start Date") << tr("End Date") << tr("Yes") << tr("No") << tr("Abs. Yes") << tr("Percentage");
+    columns << tr("Proposal") << tr("Amount") << tr("Start Date") << tr("End Date") << tr("Yes") << tr("No") << tr("Abstains") << tr("Percentage");
     
     networkManager = new QNetworkAccessManager(this);
 
@@ -124,7 +124,7 @@ void ProposalTableModel::refreshProposals() {
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        pbudgetProposal->GetTotalPaymentCount(),
+                        pbudgetProposal->GetAmount(),
                         percentage));
     }
     endResetModel();
@@ -260,7 +260,7 @@ QVariant ProposalTableModel::headerData(int section, Qt::Orientation orientation
             case NoVotes:
                 return tr("Obtained no votes.");
             case Abstains:
-                return tr("Obtained absolute yes votes.");
+                return tr("Obtained abstains votes.");
             case Amount:
                 return tr("Proposed amount.");
             case Percentage:
