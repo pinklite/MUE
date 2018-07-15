@@ -100,6 +100,8 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
 
+	
+	
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setSpacing(0);
 
