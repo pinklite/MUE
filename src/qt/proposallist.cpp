@@ -76,7 +76,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     startDateWidget->addItem(tr("Last month"), LastMonth);
     startDateWidget->addItem(tr("This year"), ThisYear);
     startDateWidget->addItem(tr("Range..."), Range);
-    startDateWidget->setCurrentIndex(settings.value("proposalStartDateIndex").toInt());
+    startDateWidget->setCurrentIndex(settings.value("proposalStartDateIndex"));
     hlayout->addWidget(startDateWidget);
 
     endDateWidget = new QComboBox(this);
@@ -87,7 +87,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     endDateWidget->addItem(tr("Last month"), LastMonth);
     endDateWidget->addItem(tr("This year"), ThisYear);
     endDateWidget->addItem(tr("Range..."), Range);
-    endDateWidget->setCurrentIndex(settings.value("proposalEndDateIndex").toInt());
+    endDateWidget->setCurrentIndex(settings.value("proposalEndDateIndex"));
     hlayout->addWidget(endDateWidget);
 
     yesVotesWidget = new QLineEdit(this);
