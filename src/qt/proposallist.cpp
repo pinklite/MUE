@@ -68,26 +68,20 @@ ProposalList::ProposalList(   QWidget *parent) :
     amountWidget->setObjectName("amountWidget");
     hlayout->addWidget(amountWidget);
 
-    startDateWidget = new QComboBox(this);
-    startDateWidget->addItem(tr("All"), All);
-    startDateWidget->addItem(tr("Today"), Today);
-    startDateWidget->addItem(tr("This week"), ThisWeek);
-    startDateWidget->addItem(tr("This month"), ThisMonth);
-    startDateWidget->addItem(tr("Last month"), LastMonth);
-    startDateWidget->addItem(tr("This year"), ThisYear);
-    startDateWidget->addItem(tr("Range..."), Range);
-    startDateWidget->setCurrentIndex(settings.value("proposalStartDateIndex"));
+    yesVotesWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    yesVotesWidget->setPlaceholderText(tr("Min start blocks"));
+#endif
+    yesVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    yesVotesWidget->setObjectName("yesVotesWidget");
     hlayout->addWidget(startDateWidget);
 
-    endDateWidget = new QComboBox(this);
-    endDateWidget->addItem(tr("All"), All);
-    endDateWidget->addItem(tr("Today"), Today);
-    endDateWidget->addItem(tr("This week"), ThisWeek);
-    endDateWidget->addItem(tr("This month"), ThisMonth);
-    endDateWidget->addItem(tr("Last month"), LastMonth);
-    endDateWidget->addItem(tr("This year"), ThisYear);
-    endDateWidget->addItem(tr("Range..."), Range);
-    endDateWidget->setCurrentIndex(settings.value("proposalEndDateIndex"));
+    yesVotesWidget = new QLineEdit(this);
+#if QT_VERSION >= 0x040700
+    yesVotesWidget->setPlaceholderText(tr("Min end blocks"));
+#endif
+    yesVotesWidget->setValidator(new QIntValidator(0, INT_MAX, this));
+    yesVotesWidget->setObjectName("yesVotesWidget");
     hlayout->addWidget(endDateWidget);
 
     yesVotesWidget = new QLineEdit(this);
