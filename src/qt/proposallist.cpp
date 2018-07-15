@@ -116,12 +116,12 @@ ProposalList::ProposalList(   QWidget *parent) :
     percentageWidget->setValidator(new QIntValidator(-100, 100, this));
     percentageWidget->setObjectName("percentageWidget");
     hlayout->addWidget(percentageWidget);
-	/*
+
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setSpacing(0);
 
     QTableView *view = new QTableView(this);
-    vlayout->addLayout(hlayout);	*/
+    vlayout->addLayout(hlayout);	
 	
 	
     startDateRangeWidget = new QLineEdit(this);
@@ -140,7 +140,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     endDateRangeWidget->setObjectName("endDateRangeWidget");
     vlayout->addWidget(endDateRangeWidget);		
 	
-	/*
+	
     vlayout->addWidget(view);
     vlayout->setSpacing(0);
     int width = view->verticalScrollBar()->sizeHint().width();
@@ -154,7 +154,7 @@ ProposalList::ProposalList(   QWidget *parent) :
     view->setTabKeyNavigation(false);
     view->setContextMenuPolicy(Qt::CustomContextMenu); 
 
-    proposalList = view; */
+    proposalList = view;
 
     QHBoxLayout *actionBar = new QHBoxLayout();
     actionBar->setSpacing(11);
