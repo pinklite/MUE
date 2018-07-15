@@ -558,7 +558,7 @@ void ProposalList::endDateRangeChanged()
     proposalProxyModel->setProposalEnd(endDate.toInt());
 }	*/
 // Make column use all the space available, useful during window resizing.
-void TableViewLastColumnResizingFixer::stretchColumnWidth
+void TableViewLastColumnResizingFixer::stretchColumnWidth(int column)
 {
     disconnectViewHeadersSignals();
     resizeColumn(column, getAvailableWidthForColumn(column));
