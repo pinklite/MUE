@@ -42,7 +42,7 @@ static const char* PERSISTENCE_DATE_FORMAT = "yyyy-MM-dd";
 
 ProposalList::ProposalList(   QWidget *parent) :
     QWidget(parent), proposalTableModel(0), proposalProxyModel(0),
-    proposalList(0)/*, columnResizingFixer(0)*/
+    proposalList(0), columnResizingFixer(0)
 {
     proposalTableModel = new ProposalTableModel( this); 
     QSettings settings;
@@ -233,7 +233,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, ABSTAIN_COLUMN_WIDTH, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
+    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, PERCENTAGE_COLUMN_WIDTH);
         
 
 
@@ -557,10 +557,9 @@ void ProposalList::endDateRangeChanged()
     
     proposalProxyModel->setProposalEnd(endDate.toInt());
 }	*/
-/*
+
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
     columnResizingFixer->stretchColumnWidth(ProposalTableModel::Proposal);
 }
-*/

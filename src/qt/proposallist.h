@@ -90,9 +90,9 @@ private:
     //QWidget *createEndDateRangeWidget();
     void vote_click_handler(const std::string voteString);
 
-    //GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
+    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
 
-    //virtual void resizeEvent(QResizeEvent* event);
+    virtual void resizeEvent(QResizeEvent* event);
 
 private Q_SLOTS:
     void contextualMenu(const QPoint &);
