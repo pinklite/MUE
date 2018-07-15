@@ -222,18 +222,28 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->sortByColumn(ProposalTableModel::StartDate, Qt::DescendingOrder);
     proposalList->verticalHeader()->hide();
 
-    proposalList->setColumnWidth(0, 200);
-    proposalList->setColumnWidth(1, 70);
-    proposalList->setColumnWidth(2, 70);
-    proposalList->setColumnWidth(3, 60);
-    proposalList->setColumnWidth(4, 60);
-    proposalList->setColumnWidth(5, 60);
-    proposalList->setColumnWidth(6, 100);
-    proposalList->setColumnWidth(7, 80);
+    int PROPOSAL_COLUMN_WIDTH = 200;
+    int START_DATE_COLUMN_WIDTH = 70;
+    int END_DATE_COLUMN_WIDTH = 70;
+    int YES_VOTES_COLUMN_WIDTH = 60;
+    int NO_VOTES_COLUMN_WIDTH = 60;
+    int ABSTAIN_COLUMN_WIDTH = 60;
+    int AMOUNT_COLUMN_WIDTH = 100;
+    int PERCENTAGE_COLUMN_WIDTH = 80;
+    int MINIMUM_COLUMN_WIDTH = 23;	
+	
+    proposalList->setColumnWidth(0, PROPOSAL_COLUMN_WIDTH);
+    proposalList->setColumnWidth(1, AMOUNT_COLUMN_WIDTH);
+    proposalList->setColumnWidth(2, START_DATE_COLUMN_WIDTH);
+    proposalList->setColumnWidth(3, END_DATE_COLUMN_WIDTH);
+    proposalList->setColumnWidth(4, YES_VOTES_COLUMN_WIDTH);
+    proposalList->setColumnWidth(5, NO_VOTES_COLUMN_WIDTH);
+    proposalList->setColumnWidth(6, ABSTAIN_COLUMN_WIDTH);
+    proposalList->setColumnWidth(7, PERCENTAGE_COLUMN_WIDTH);
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
+    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
         
 
 

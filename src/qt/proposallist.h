@@ -47,7 +47,7 @@ public:
         ThisYear,
         Range
     };
-
+/*
     enum ColumnWidths {
         PROPOSAL_COLUMN_WIDTH = 200,
         START_DATE_COLUMN_WIDTH = 70,
@@ -59,7 +59,7 @@ public:
         PERCENTAGE_COLUMN_WIDTH = 80,
         MINIMUM_COLUMN_WIDTH = 23
     };
-
+*/
 private:
     ProposalTableModel *proposalTableModel;
     ProposalFilterProxy *proposalProxyModel;
