@@ -78,8 +78,8 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
     bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
-    bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount());
-	bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount());
+    bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
+	bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount()));
     bObj.push_back(pbudgetProposal->IsEstablished());
 
     std::string strError = "";
