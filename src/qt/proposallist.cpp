@@ -222,14 +222,14 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->sortByColumn(ProposalTableModel::StartDate, Qt::DescendingOrder);
     proposalList->verticalHeader()->hide();
 
-    proposalList->setColumnWidth(0, PROPOSAL_COLUMN_WIDTH);
-    proposalList->setColumnWidth(1, START_DATE_COLUMN_WIDTH);
-    proposalList->setColumnWidth(2, END_DATE_COLUMN_WIDTH);
-    proposalList->setColumnWidth(3, YES_VOTES_COLUMN_WIDTH);
-    proposalList->setColumnWidth(4, NO_VOTES_COLUMN_WIDTH);
-    proposalList->setColumnWidth(5, ABSTAIN_COLUMN_WIDTH);
-    proposalList->setColumnWidth(6, AMOUNT_COLUMN_WIDTH);
-    proposalList->setColumnWidth(7, PERCENTAGE_COLUMN_WIDTH);
+    proposalList->setColumnWidth(0, 200);
+    proposalList->setColumnWidth(1, 70);
+    proposalList->setColumnWidth(2, 70);
+    proposalList->setColumnWidth(3, 60);
+    proposalList->setColumnWidth(4, 60);
+    proposalList->setColumnWidth(5, 60);
+    proposalList->setColumnWidth(6, 100);
+    proposalList->setColumnWidth(7, 80);
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
