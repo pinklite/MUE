@@ -80,15 +80,13 @@ private:
 
     QMenu *contextMenu;
 
-    QFrame *startBlockRangeWidget;
+    QLineEdit *startBlockRangeWidget;
 
 
-    QFrame *endBlockRangeWidget;
+    QLineEdit *endBlockRangeWidget;
 
     ColumnAlignedLayout *hlayout;
 
-    QLineEdit *createStartBlockRangeWidget;
-    QLineEdit *createEndBlockRangeWidget;
     void vote_click_handler(const std::string voteString);
 
     GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
