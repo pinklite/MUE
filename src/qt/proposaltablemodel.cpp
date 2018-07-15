@@ -46,7 +46,7 @@ ProposalTableModel::ProposalTableModel( QObject *parent):
         QAbstractTableModel(parent)
 
 {
-    columns << tr("Proposal") << tr("Amount") << tr("Start Date") << tr("End Date") << tr("Yes") << tr("No") << tr("Abstains") << tr("Percentage");
+    columns << tr("Proposal") << tr("Amount") << tr("Start Date") << tr("End Date") << tr("Yes") << tr("No") << tr("Abstain") << tr("Percentage");
     
     networkManager = new QNetworkAccessManager(this);
 
@@ -77,7 +77,7 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back(EncodeDestination(address));
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
-    bObj.push_back(pbudgetProposal->GetAbstains());
+    bObj.push_back(pbudgetProposal->GetAbstain());
     bObj.push_back(ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount()));
 	bObj.push_back((int64_t)pbudgetProposal->GetAmount());
     bObj.push_back(pbudgetProposal->IsEstablished());
@@ -124,7 +124,7 @@ void ProposalTableModel::refreshProposals() {
                         QString::fromStdString(pbudgetProposal->GetName()),
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
-                        pbudgetProposal->GetAbstains(),
+                        pbudgetProposal->GetAbstain(),
                         pbudgetProposal->GetAmount(),
                         percentage));
     }
@@ -261,7 +261,7 @@ QVariant ProposalTableModel::headerData(int section, Qt::Orientation orientation
             case NoVotes:
                 return tr("Obtained no votes.");
             case AbstainVotes:
-                return tr("Obtained abstains votes.");
+                return tr("Obtained abstain votes.");
             case Amount:
                 return tr("Proposed amount.");
             case Percentage:

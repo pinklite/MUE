@@ -331,7 +331,7 @@ void ProposalList::changedAbstainVotes(const QString &minAbstainVotes)
 
     int value = minAbstainVotes == "" ? INT_MIN : minAbstainVotes.toInt();
 
-    proposalProxyModel->setMinAbstainsVotes(value);
+    proposalProxyModel->setMinAbstains\Votes(value);
 }
 
 void ProposalList::contextualMenu(const QPoint &point)
