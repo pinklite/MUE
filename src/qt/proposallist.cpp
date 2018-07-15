@@ -185,12 +185,11 @@ ProposalList::ProposalList(   QWidget *parent) :
     connect(voteNoButton, SIGNAL(clicked()), this, SLOT(voteNo()));
 
     connect(proposalWidget, SIGNAL(textChanged(QString)), this, SLOT(changedProposal(QString)));
-    connect(startDateWidget, SIGNAL(activated(int)), this, SLOT(chooseStartDate(int)));
-    connect(endDateWidget, SIGNAL(activated(int)), this, SLOT(chooseEndDate(int)));
+    connect(startDateWidget, SIGNAL(textChanged), this, SLOT(chooseStartDate(QString)));
+    connect(endDateWidget, SIGNAL(textChanged(QString)), this, SLOT(chooseEndDate(QString)));
     connect(yesVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedYesVotes(QString)));
     connect(noVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedNoVotes(QString)));
     connect(AbstainsWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAbstains(QString)));
-    connect(yesVotesWidget, SIGNAL(textChanged(QString)), this, SLOT(changedYesVotes(QString)));
     connect(amountWidget, SIGNAL(textChanged(QString)), this, SLOT(changedAmount(QString)));
     connect(percentageWidget, SIGNAL(textChanged(QString)), this, SLOT(changedPercentage(QString)));
 
