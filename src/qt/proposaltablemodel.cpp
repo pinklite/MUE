@@ -70,16 +70,16 @@ void budgetToST(CBudgetProposal* pbudgetProposal, UniValue& bObj)
     bObj.push_back(pbudgetProposal->GetURL());
     bObj.push_back(pbudgetProposal->GetHash().ToString());
     bObj.push_back(pbudgetProposal->nFeeTXHash.ToString());
-    bObj.push_back(Pair("BlockStart", (int64_t)pbudgetProposal->GetBlockStart()));
-    bObj.push_back(Pair("BlockEnd", (int64_t)pbudgetProposal->GetBlockEnd()));
+    bObj.push_back((int64_t)pbudgetProposal->GetBlockStart());
+    bObj.push_back((int64_t)pbudgetProposal->GetBlockEnd());
     bObj.push_back((int64_t)pbudgetProposal->GetTotalPaymentCount());
     bObj.push_back((int64_t)pbudgetProposal->GetRemainingPaymentCount());
     bObj.push_back(EncodeDestination(address));
     bObj.push_back((int64_t)pbudgetProposal->GetYeas());
     bObj.push_back((int64_t)pbudgetProposal->GetNays());
     bObj.push_back((int64_t)pbudgetProposal->GetAbstains());
-    bObj.push_back(Pair("TotalPayment", ValueFromAmount(pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount())));
-    bObj.push_back(Pair("MonthlyPayment", ValueFromAmount(pbudgetProposal->GetAmount())));
+    bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount() * pbudgetProposal->GetTotalPaymentCount());
+	bObj.push_back(ValueFromAmount = pbudgetProposal->GetAmount());
     bObj.push_back(pbudgetProposal->IsEstablished());
 
     std::string strError = "";
@@ -102,17 +102,14 @@ void ProposalTableModel::refreshProposals() {
 
         //UniValue objResult(UniValue::VOBJ);
         //UniValue dataObj(UniValue::VOBJ);
-        //
-		
-		UniValue returnObj(UniValue::VOBJ);
-		UniValue bObj(UniValue::VOBJ);
-		//returnObj.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
-		budgetToST(pbudgetProposal, bObj);	
-        std::vector<UniValue> arr1 = bObj.getValues();
-        std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
-        returnObj = arr2.at( 1 );
+        //objResult.read(pbudgetProposal->GetDataAsPlainString()); // not need as time being
 
-	
+        //std::vector<UniValue> arr1 = objResult.getValues();
+        //std::vector<UniValue> arr2 = arr1.at( 0 ).getValues();
+        //dataObj = arr2.at( 1 );
+
+		UniValue bObj(UniValue::VOBJ);
+		budgetToST(pbudgetProposal, bObj);		
 		
         int percentage = 0;
 		
@@ -120,14 +117,14 @@ void ProposalTableModel::refreshProposals() {
         
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
-                        returnObj["BlockStart"].get_int(),
-                        returnObj["BlockEnd"].get_int(),
+                        pbudgetProposal->GetBlockStart(),
+                        pbudgetProposal->GetBlockEnd(),
                         QString::fromStdString(pbudgetProposal->GetURL()),
                         QString::fromStdString(pbudgetProposal->GetName()),
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        returnObj["TotalPayment"].get_int(),
+                        pbudgetProposal->GetAmount(),
                         percentage));
     }
     endResetModel();
