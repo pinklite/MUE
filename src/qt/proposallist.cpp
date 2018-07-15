@@ -64,7 +64,7 @@ ProposalList::ProposalList(   QWidget *parent) :
 #if QT_VERSION >= 0x040700
     amountWidget->setPlaceholderText(tr("Min amount"));
 #endif
-    amountWidget->setValidator(new QDoubleValidator(0, 1e20, 8, this));
+    amountWidget->setValidator(new QDoubleValidator(0, 1e20, 0, this));
     amountWidget->setObjectName("amountWidget");
     hlayout->addWidget(amountWidget);
 
