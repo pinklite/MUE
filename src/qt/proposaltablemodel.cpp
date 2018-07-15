@@ -120,14 +120,14 @@ void ProposalTableModel::refreshProposals() {
         
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
-                        dataObj["BlockStart"].get_int(),
-                        dataObj["BlockEnd"].get_int(),
+                        returnObj["BlockStart"].get_int(),
+                        returnObj["BlockEnd"].get_int(),
                         QString::fromStdString(pbudgetProposal->GetURL()),
                         QString::fromStdString(pbudgetProposal->GetName()),
                         pbudgetProposal->GetYeas(),
                         pbudgetProposal->GetNays(),
                         pbudgetProposal->GetAbstains(),
-                        dataObj["TotalPayment"].get_int(),
+                        returnObj["TotalPayment"].get_int(),
                         percentage));
     }
     endResetModel();
