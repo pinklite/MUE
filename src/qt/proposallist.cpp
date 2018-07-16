@@ -42,7 +42,7 @@ static const char* PERSISTENCE_DATE_FORMAT = "yyyy-MM-dd";
 
 ProposalList::ProposalList(   QWidget *parent) :
     QWidget(parent), proposalTableModel(0), proposalProxyModel(0),
-    proposalList(0)/*,columnResizingFixer(0)*/
+    proposalList(0), columnResizingFixer(0)
 {
     proposalTableModel = new ProposalTableModel( this); 
     QSettings settings;
@@ -223,17 +223,17 @@ ProposalList::ProposalList(   QWidget *parent) :
     proposalList->verticalHeader()->hide();
 
     proposalList->setColumnWidth(ProposalTableModel::Proposal, PROPOSAL_COLUMN_WIDTH);
+    proposalList->setColumnWidth(ProposalTableModel::Amount, AMOUNT_COLUMN_WIDTH);	
     proposalList->setColumnWidth(ProposalTableModel::StartDate, START_DATE_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::EndDate, END_DATE_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::YesVotes, YES_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::NoVotes, NO_VOTES_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::AbstainVotes, ABSTAIN_COLUMN_WIDTH);
-    proposalList->setColumnWidth(ProposalTableModel::Amount, AMOUNT_COLUMN_WIDTH);
     proposalList->setColumnWidth(ProposalTableModel::Percentage, PERCENTAGE_COLUMN_WIDTH);
 
     connect(proposalList->selectionModel(), SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this, SLOT(computeSum()));
 	
-    //columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer stretchColumnWidth(ProposalTableModel::Proposal);
+    columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(proposalList, PERCENTAGE_COLUMN_WIDTH, MINIMUM_COLUMN_WIDTH);
         
 
 
@@ -558,15 +558,10 @@ void ProposalList::endDateRangeChanged()
     proposalProxyModel->setProposalEnd(endDate.toInt());
 }	*/
 // Make column use all the space available, useful during window resizing.
-void TableViewLastColumnResizingFixer::stretchColumnWidth(int column)
-{
-    disconnectViewHeadersSignals();
-    resizeColumn(column, getAvailableWidthForColumn(column));
-    connectViewHeadersSignals();
-}
+
 
 void ProposalList::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    TableViewLastColumnResizingFixer.stretchColumnWidth(ProposalTableModel::Proposal);
+    columnResizingFixer->stretchColumnWidth(ProposalTableModel::Proposal);
 }

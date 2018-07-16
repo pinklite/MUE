@@ -50,14 +50,14 @@ public:
 
     enum ColumnWidths {
         PROPOSAL_COLUMN_WIDTH = 380,
+        AMOUNT_COLUMN_WIDTH = 100,		
         START_DATE_COLUMN_WIDTH = 110,
         END_DATE_COLUMN_WIDTH = 110,
         YES_VOTES_COLUMN_WIDTH = 60,
         NO_VOTES_COLUMN_WIDTH = 60,
         ABSTAIN_COLUMN_WIDTH = 60,
-        AMOUNT_COLUMN_WIDTH = 100,
         PERCENTAGE_COLUMN_WIDTH = 70,
-        MINIMUM_COLUMN_WIDTH = 60		
+        MINIMUM_COLUMN_WIDTH = 23		
     };
 
 private:
@@ -91,7 +91,7 @@ private:
     //QWidget *createEndDateRangeWidget();
     void vote_click_handler(const std::string voteString);
 
-    //GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
+    GUIUtil::TableViewLastColumnResizingFixer *columnResizingFixer;
 
     virtual void resizeEvent(QResizeEvent* event);
 
