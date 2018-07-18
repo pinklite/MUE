@@ -54,14 +54,14 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (     0, uint256("2b1a0f66712aad59ad283662d5b919415a25921ce89511d73019107e380485bf"))
-    (  1000, uint256("8defd49579d63545f9e8cdda31f8503e0513328ca3f7428f33a915258c764d15"))
-    ( 10000, uint256("6af2431daa7456e4620e9493091648eeaac8ddfd53d8cff8101c26806e301d9a"))
-    ( 90000, uint256("a883d86273f02cb19252a878d1e0bda1e5321140480b08e3df9544d7b3d1ce56"))
-    (152000, uint256("4dc1a3eb7d17bab4e7f5768e927c9666ba760d6882d3b600519fdd7b83f65610"))
-    (200000, uint256("9260e1eb2d3851bccd2794e2c61c29af91fcd4b56ba207a4b9a5b1e79b53fb10"))
-    (340000, uint256("5554c0f33c36f21b79abfda9f92d1b855ed0e67b556361983af6611d75a022b3"))
-    (390000, uint256("1702d23f4b0f9bbcd98cc34ce90b82dbdb5d4ebf80f135284dfd709b0964f080"));
+    (     0, uint256("20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"))
+    (  1000, uint256("a8b2ab1d3f60ec9a54dee1b10164cabb9f6d8180389959c1f5f37fa9e012e3e8"))
+    ( 10000, uint256("868c1e05ea03784fc00b43c30c1af4908397714c36add59c3380d0e7707a9782"))
+    ( 40000	, uint256("02c0cedd92a31f4e3f73b8423d6b1d366c9650f20cc42910a8b5eea35a901d95"))
+    (50000, uint256("8086a82a281deb7919d76efb31f1d9bfe9829a2ec4f4ca7350ac22ef3817990c"))
+    (60000, uint256("15abab501e13158510aeea79011f1767000f366d31fa225635203e6af877106c"))
+    (70000, uint256("f94cc246cd089eceed108f08333f4fc0150516635657c083defe1517b89bef03"))
+    (81603, uint256("f0577a749d725d7e7f43a7203a7ece7013e96c9deaba94db45a510c2c22368ef"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
@@ -120,12 +120,12 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0x91;
-        pchMessageStart[1] = 0xc4;
-        pchMessageStart[2] = 0xfd;
-        pchMessageStart[3] = 0xe9;
+        pchMessageStart[0] = 0xab;
+        pchMessageStart[1] = 0xd8;
+        pchMessageStart[2] = 0xe2;
+        pchMessageStart[3] = 0xd5;
         vAlertPubKey = ParseHex("04659d53bd8f7ad9d34a17281febedac754e5a6eb136142d3a9c6c0ea21b6ed7498ceb3d872eed00ae755f7aeadaeb1d9ab5e1a8f1e7efcd0ddcb39d4623c12790");
-        nDefaultPort = 11771;
+        nDefaultPort = 18745;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nMaxReorganizationDepth = 100;
         nEnforceBlockUpgradeMajority = 750;
@@ -155,7 +155,7 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "12 September 2017";
+        const char* pszTimestamp = "Curium May 15 2018 we began our quest for the new network";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -165,18 +165,20 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1505224800;
+        genesis.nTime = 1526939990;
         genesis.nBits = 0x207fffff;;
-        genesis.nNonce = 12345;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x2b1a0f66712aad59ad283662d5b919415a25921ce89511d73019107e380485bf"));
-        assert(genesis.hashMerkleRoot == uint256("0x894177137a45952cfed89dd395e7fc85208a53548f34defc7c1a85cb0736b3a3"));
+        assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
+        assert(genesis.hashMerkleRoot == uint256("0x8738140c726a5ee4eabd99024115280f825c57bae6decc2b14251b917152df4f"));
 
-        vSeeds.push_back(CDNSSeedData("0", "dns0.phore.io")); // run by Moonshot
-        vSeeds.push_back(CDNSSeedData("1", "phore.seed.rho.industries")); // run by Julian Meyer (meyer9)
+        vSeeds.push_back(CDNSSeedData("1stdnsseedforcurium", "dnsseed.mrmetech.me"));     // Primary DNS Seeder from Fuzzbawls
+        vSeeds.push_back(CDNSSeedData("curium1", "207.246.120.137"));    // Secondary DNS Seeder from Fuzzbawls
+        vSeeds.push_back(CDNSSeedData("curium2", "159.203.138.56"));         // Single node address
+        vSeeds.push_back(CDNSSeedData("curium3", "46.101.62.236"));         // Single node address
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 55);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 212);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
@@ -184,7 +186,7 @@ public:
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x01)(0xbc).convert_to_container<std::vector<unsigned char> >();
 
-        bech32_hrp = "ph";
+        bech32_hrp = "gp";
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -198,16 +200,11 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "04659d53bd8f7ad9d34a17281febedac754e5a6eb136142d3a9c6c0ea21b6ed7498ceb3d872eed00ae755f7aeadaeb1d9ab5e1a8f1e7efcd0ddcb39d4623c12790";
-        strObfuscationPoolDummyAddress = "PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp";
+        strSporkKey = "04ba3e15d1276b37932e3861f920dedaa38e56ab9e1f05f789af06e763759652785bf96cc7375015abaaab6a58f18f20d022a3ccf7c0966f8781affee51dbc08f7";
+        strObfuscationPoolDummyAddress = "RCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp";
 
         /** Zerocoin */
-        zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
-            "4069182906412495150821892985591491761845028084891200728449926873928072877767359714183472702618963750149718246911"
-            "6507761337985909570009733045974880842840179742910064245869181719511874612151517265463228221686998754918242243363"
-            "7259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133"
-            "8441436038339044149526344321901146575444541784240209246165157233507787077498171257724679629263863563732899121548"
-            "31438167899885040445364023527381951378636564391212010397122822120720357";
+        zerocoinModulus = "949095957102901424165005743206075237918927185644508281721595049430135191788988250672362679730600654292612389558863554310553862934247224257388215158104260928073240854014458757417754474653505701243017647799681771896720056573295189290545504151065605863168771442060260038616331277655659418225751494371021602498638201151233861828407081267608284735045242816101903771761023762799824183488778280240911901179365129615023587304892714330769988937391159973997061248998610792319659429741488805570758060158758673812695500463760918378917727165655781230163900397304147420181650737066756390943371937899832943854236948356409126827563552881996260126888315827149516661918652888417577104081556028717705333252113749784130003220606532340029127529134320138525652223612702807625207726164317625460325503981494842339289019775251464014247682223178301829953590358118850181651359485326326599299513449900539668262149399867750352815127908481163097088923056085438819267516858023066700975628617681175165990851217227122074568757432336234407184416658946847479213291166038054888731599590082195767591495007813145611447488079238391223565637942257298734506554048723753266407546122948129830046806770582355923552150663937176275833876650417830133400291801707588988840958825893";
 
 
         nZerocoinLastOldParams = 99999999; // Updated to defer zerocoin v2 for further testing.
@@ -260,11 +257,11 @@ public:
         nZerocoinLastOldParams = 100000000;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1505224800;
-        genesis.nNonce = 12346;
+        genesis.nTime = 1526939990;
+        genesis.nNonce = 0;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0xfab709a0c107fe7cf6b0d552c514ef3228f9e0f107cd3c9b2fcea96512342cd8"));
+        assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -279,7 +276,7 @@ public:
         // Testnet phore BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x01)(0x00)(0x00)(0x80).convert_to_container<std::vector<unsigned char> >();
 
-        bech32_hrp = "tp";
+        bech32_hrp = "tg";
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 
@@ -325,9 +322,9 @@ public:
         nTargetTimespan = 24 * 60 * 60; // Phore: 1 day
         nTargetSpacing = 1 * 60;        // Phore: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1505224800;
+        genesis.nTime = 1526939990;
         genesis.nBits = 0x207fffff;
-        genesis.nNonce = 12345;
+        genesis.nNonce = 0;
         nMaturity = 0;
         nLastPOWBlock = 999999999; // PoS complicates Regtest because of timing issues
         nZerocoinLastOldParams = 499;
@@ -335,9 +332,9 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 11773;
-        assert(hashGenesisBlock == uint256("0x2b1a0f66712aad59ad283662d5b919415a25921ce89511d73019107e380485bf"));
+        assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
 
-        bech32_hrp = "phrt";
+        bech32_hrp = "pget";
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
