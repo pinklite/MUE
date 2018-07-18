@@ -183,9 +183,9 @@
     </message>
     </context>
 <context>
-    <name>ZPhrControlDialog</name>
+    <name>ZCruControlDialog</name>
     </context>
 <context>
-    <name>phore-core</name>
+    <name>curium-core</name>
     </context>
 </TS>
