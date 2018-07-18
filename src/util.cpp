@@ -538,19 +538,20 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
     std::string message = FormatException(pex, pszThread);
     LogPrintf("\n\n************************\n%s\n", message);
     fprintf(stderr, "\n\n************************\n%s\n", message.c_str());
+    fprintf(stderr, "\n\n************************\n%s\n", message.c_str());
     strMiscWarning = message;
 }
 
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\Curium
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\Curium
-// Mac: ~/Library/Application Support/Curium
-// Unix: ~/.curium
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\Curiumcru
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\Curiumcru
+// Mac: ~/Library/Application Support/Curiumcru
+// Unix: ~/.curiumcru
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Curium";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Curiumcru";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -562,10 +563,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "Curium";
+    return pathRet / "Curiumcru";
 #else
     // Unix
-    return pathRet / ".curium";
+    return pathRet / ".curiumcru";
 #endif
 #endif
 }
