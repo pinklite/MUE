@@ -384,11 +384,8 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     proposalAction->setStatusTip(tr("Browse proposals"));
     proposalAction->setToolTip(proposalAction->statusTip());
     proposalAction->setCheckable(true);
-#ifdef Q_OS_MAC
-    proposalAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_7));
-#else
-    proposalAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_7));
-#endif
+    proposalAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_6));
+    tabGroup->addAction(proposalAction);
 
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setStatusTip(tr("Quit application"));
