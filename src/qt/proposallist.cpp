@@ -8,10 +8,16 @@
 #include "proposalfilterproxy.h"
 #include "proposalrecord.h"
 #include "proposaltablemodel.h"
+#include "activemasternode.h"
+#include "db.h"
+#include "init.h"
+#include "main.h"
 #include "masternode-budget.h"
 #include "masternode-payments.h"
 #include "masternodeconfig.h"
 #include "masternodeman.h"
+#include "rpcserver.h"
+#include "utilmoneystr.h"
 
 #include "rpcserver.h"
 #include "util.h"
@@ -382,69 +388,57 @@ void ProposalList::vote_click_handler(const std::string voteString)
     //uint256 nProposalHash = CBudgetVote::CBudgetVote();   // tmp remove
     //uint256 nBudgetHashIn  = CFinalizedBudgetVote::CFinalizedBudgetVote();
 
-    int nSuccessful = 0;
-    int nFailed = 0;
-
+    int success = 0;
+    int failed = 0;
+	
+	std::string strVote = voteString;		
+	int nVote = VOTE_ABSTAIN;
+	if (strVote == "yes") nVote = VOTE_YES;
+	if (strVote == "no") nVote = VOTE_NO;
+			
+			
     for (const auto& mne : masternodeConfig.getEntries()) {
-        std::string strError;
-        std::vector<unsigned char> vchMasterNodeSignature;
-        std::string strMasterNodeSignMessage;
+            std::string errorMessage;
+            std::vector<unsigned char> vchMasterNodeSignature;
+            std::string strMasterNodeSignMessage;
 
-        CPubKey pubKeyCollateralAddress;
-        CKey keyCollateralAddress;
-        CPubKey pubKeyMasternode;
-        CKey keyMasternode;
-        std::string errorMessage;
-		uint256 hash = 0;
-		std::string strVote = 0;		
-		int nVote = VOTE_ABSTAIN;
-		if (strVote == "yes") nVote = VOTE_YES;
-		if (strVote == "no") nVote = VOTE_NO;
+            CPubKey pubKeyCollateralAddress;
+            CKey keyCollateralAddress;
+            CPubKey pubKeyMasternode;
+            CKey keyMasternode;
 
-		
-        UniValue statusObj(UniValue::VOBJ);
 
-        if(!obfuScationSigner.SetKey(strMasterNodePrivKey, errorMessage, keyMasternode, pubKeyMasternode)){
-            nFailed++;
-            continue;
-         }
+            UniValue statusObj(UniValue::VOBJ);
 
-        uint256 nTxHash;
-        nTxHash.SetHex(mne.getTxHash());
+            if (!obfuScationSigner.SetKey(mne.getPrivKey(), errorMessage, keyMasternode, pubKeyMasternode)) {
+                failed++;
+                continue;
+            }
 
-        int nOutputIndex = 0;
-        if(!ParseInt32(mne.getOutputIndex(), &nOutputIndex)) {
-            continue;
-        }
+            CMasternode* pmn = mnodeman.Find(pubKeyMasternode);
+            if (pmn == NULL) {
+                failed++;
+                continue;
+            }
 
-        COutPoint outpoint(nTxHash, nOutputIndex);
+            CBudgetVote vote(pmn->vin, hash, nVote);
+            if (!vote.Sign(keyMasternode, pubKeyMasternode)) {
+                failed++;
+                continue;
+            }
 
-        CMasternode mn;
-        CMasternode* pmn = mnodeman.Find(activeMasternode.vin);;
-
-        if(pmn == NULL) {
-            nFailed++;
-            continue;
-        }
-
-        CBudgetVote vote(activeMasternode.vin, hash, nVote);
-        if(!vote.Sign(keyMasternode, pubKeyMasternode)){
-            nFailed++;
-            continue;
-        }
-		
-        if(budget.UpdateProposal(vote, NULL, strError)) {
-			budget.mapSeenMasternodeBudgetVotes.insert(make_pair(vote.GetHash(), vote));
-			vote.Relay();
-            nSuccessful++;
-        }
-        else {
-            nFailed++;
-        }
+            std::string strError = "";
+            if (budget.UpdateProposal(vote, NULL, strError)) {
+                budget.mapSeenMasternodeBudgetVotes.insert(make_pair(vote.GetHash(), vote));
+                vote.Relay();
+                success++;
+            } else {
+                failed++;
+            }
     }
 
     QMessageBox::information(this, tr("Voting"),
-        tr("You voted %1 %2 time(s) successfully and failed %3 time(s) on %4").arg(QString::fromStdString(voteString), QString::number(nSuccessful), QString::number(nFailed), proposalName));
+        tr("You voted %1 %2 time(s) successfully and failed %3 time(s) on %4").arg(QString::fromStdString(voteString), QString::number(success), QString::number(failed), proposalName));
 
     refreshProposals(true);
 }
