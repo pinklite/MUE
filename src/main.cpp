@@ -4266,11 +4266,11 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
             out.nValue = 0;
             out.scriptPubKey.resize(38);
             out.scriptPubKey[0] = OP_RETURN;
-            out.scriptPubKey[1] = 0x24;
-            out.scriptPubKey[2] = 0xaa;
-            out.scriptPubKey[3] = 0x21;
-            out.scriptPubKey[4] = 0xa9;
-            out.scriptPubKey[5] = 0xed;
+            out.scriptPubKey[1] = 0xaa;
+            out.scriptPubKey[2] = 0x54;
+            out.scriptPubKey[3] = 0x34;
+            out.scriptPubKey[4] = 0xb4;
+            out.scriptPubKey[5] = 0xde;
             memcpy(&out.scriptPubKey[6], witnessroot.begin(), 32);
             commitment = std::vector<unsigned char>(out.scriptPubKey.begin(), out.scriptPubKey.end());
             const_cast<std::vector<CTxOut>*>(&block.vtx[0].vout)->push_back(out);
