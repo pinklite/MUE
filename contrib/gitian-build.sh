@@ -254,7 +254,7 @@ fi
 # Set up build
 pushd ./curium || exit
 git fetch
-git checkout "${COMMIT}"
+git tag -s -a "${COMMIT}"
 popd || exit
 
 # Build
