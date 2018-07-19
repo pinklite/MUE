@@ -1,7 +1,7 @@
 Curium Core integration/staging repository
 =====================================
 
-[![Build Status](https://travis-ci.org/curiumproject/Curium.svg?branch=master)](https://travis-ci.org/curiumproject/Curium)
+[![Build Status](https://travis-ci.org/curiumofficial/curium.svg?branch=master)](https://travis-ci.org/curiumofficial/curium)
 
 Curium is a cutting edge cryptocurrency, with many features not available in most other cryptocurrencies.
 - Anonymized transactions using zerocoin technology
