@@ -118,15 +118,15 @@ void ProposalTableModel::refreshProposals() {
 		
         proposalRecords.append(new ProposalRecord(
                         QString::fromStdString(pbudgetProposal->GetHash().ToString()),
-                        pbudgetProposal->GetBlockStart(),
-                        pbudgetProposal->GetBlockEnd(),
+                        (long long)pbudgetProposal->GetBlockStart(),
+                        (long long)pbudgetProposal->GetBlockEnd(),
                         QString::fromStdString(pbudgetProposal->GetURL()),
                         QString::fromStdString(pbudgetProposal->GetName()),
-                        pbudgetProposal->GetYeas(),
-                        pbudgetProposal->GetNays(),
-                        pbudgetProposal->GetAbstains(),
-                        pbudgetProposal->GetAmount(),
-                        percentage));
+                        (long long)pbudgetProposal->GetYeas(),
+                        (long long)pbudgetProposal->GetNays(),
+                        (long long)pbudgetProposal->GetAbstains(),
+                        (long long)pbudgetProposal->GetAmount(),
+                        (long long)percentage));
     }
     endResetModel();
 }
@@ -161,19 +161,19 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         case Proposal:
             return rec->name;
         case YesVotes:
-            return rec->(long long)yesVotes;
+            return (long long)(rec->yesVotes);
         case NoVotes:
-            return rec->(long long)noVotes;
+            return (long long)(rec->noVotes);
         case AbstainVotes:
-            return rec->(long long)abstainVotes;
+            return (long long)(rec->abstainVotes);
         case StartDate:
-            return rec->(long long)start_epoch;
+            return (long long)(rec->start_epoch);
         case EndDate:
-            return rec->(long long)end_epoch;
+            return (long long)(rec->end_epoch);
         case Percentage:
-            return QString("%1\%").arg(rec->(long long)percentage);
+            return QString("%1\%").arg(rec->percentage);
         case Amount:
-            return BitcoinUnits::format(BitcoinUnits::CRU, rec->(long long)amount);
+            return BitcoinUnits::format(BitcoinUnits::CRU, rec->amount);
         }
         break;
     case Qt::EditRole:
@@ -182,19 +182,19 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
         case Proposal:
             return rec->name;
         case StartDate:
-            return rec->(long long)start_epoch;
+            return (long long)(rec->start_epoch);
         case EndDate:
-            return rec->(long long)end_epoch;
+            return (long long)(rec->end_epoch);
         case YesVotes:
-            return rec->(long long)yesVotes;
+            return (long long)(rec->yesVotes);
         case NoVotes:
-            return rec->(long long)noVotes;
+            return (long long)(rec->noVotes);
         case AbstainVotes:
-            return rec->(long long)abstainVotes;
+            return (long long)(rec->abstainVotes);
         case Amount:
-            return qint64(rec->(long long)amount);
+            return qint64(rec->amount);
         case Percentage:
-            return rec->(long long)percentage;
+            return (long long)(rec->percentage);
         }
         break;
     case Qt::TextAlignmentRole:
@@ -213,23 +213,23 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
     case ProposalRole:
         return rec->name;
     case AmountRole:
-        return rec->(long long)amount;
+        return (long long)(rec->amount);
     case StartDateRole:
-        return rec->(long long)start_epoch;
+        return (long long)(rec->start_epoch);
     case EndDateRole:
-        return rec->(long long)end_epoch;
+        return (long long)(rec->end_epoch);
     case YesVotesRole:
-        return rec->(long long)yesVotes;
+        return (long long)(rec->yesVotes);
     case NoVotesRole:
-        return rec->(long long)noVotes;
+        return (long long)(rec->noVotes);
     case AbstainVotesRole:
-        return rec->(long long)abstainVotes;
+        return (long long)(rec->abstainVotes);
     case PercentageRole:
-        return rec->(long long)percentage;
+        return (long long)(rec->percentage);
     case ProposalUrlRole:
-        return rec->(long long)url;
+        return rec->url;
     case ProposalHashRole:
-        return rec->(long long)hash;
+        return rec->hash;
     }
     return QVariant();
 }
