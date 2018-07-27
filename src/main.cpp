@@ -5767,7 +5767,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         // broken release with wrong protocol version
         if (pfrom->cleanSubVer == "/Curium Core:1.1.0/") {
             LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have old block data
+            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
             return false;
         }
         if (!vRecv.empty())
@@ -6622,7 +6622,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    if (IsSporkActive(SPORK_17_SEGWIT_ACTIVATION))
+    if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
         return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
