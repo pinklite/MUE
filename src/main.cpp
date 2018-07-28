@@ -5765,8 +5765,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             pfrom->cleanSubVer = SanitizeString(pfrom->strSubVer);
         }
         // broken release with wrong protocol version
-        if (pfrom->cleanSubVer == "/Curium Core:1.1.0/"||
-            pfrom->cleanSubVer == "/Curium Core:1.2.1/")) {
+        if (pfrom->cleanSubVer == "/Curium Core:1.1.0/" ||
+            pfrom->cleanSubVer == "/Curium Core:1.2.1/") {
             LOCK(cs_main);
             Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
             return false;
