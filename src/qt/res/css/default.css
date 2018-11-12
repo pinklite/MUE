@@ -1,5 +1,5 @@
 /****************************************************************************************/
-/*************** [COLOR CODES] DARK RED:#cc0000 LIGHT RED:#ff6666 *****************/
+/*************** [COLOR CODES] DARK RED:#cc0000 LIGHT RED:#ff5555 *****************/
 /****************************************************************************************/
 
 /****************************************************************************************/
@@ -83,7 +83,7 @@ QToolBar > QToolButton:checked {
 	background-color: transparent;
 	color: #FFFFFF;
 	/* font-weight:bold; */
-	border-right: 3px solid #00d188;
+	border-right: 3px solid #ff5555;
 	opacity: 1;
 }
 QMessageBox {
@@ -100,7 +100,7 @@ QProgressBar {
 	margin: 4px;
 }
 QProgressBar::chunk {
-	background-color: #ff6666;
+	background-color: #ff5555;
 	background-color: rgba(255, 102, 102, 0.25);
 	width: 20px;
 }
@@ -138,7 +138,7 @@ QTabBar::tab {
     border-right-color:transparent;
 }
 QTabBar::tab:selected {
-    border-bottom: 3px solid #ff6666;
+    border-bottom: 3px solid #ff5555;
     background-color:transparent;
 }
 QTabBar::tab:pressed {
@@ -235,7 +235,7 @@ QLineEdit:focus, BitcoinAmountField:focus {
 
 QPushButton {
 	/* Global Button Style */
-	background-color: #00d188;
+	background-color: #ff5555;
 	padding: 0.85em 2em;
 	font-family: "Montserrat";
 	letter-spacing: 1px;
@@ -247,7 +247,7 @@ QPushButton {
 	text-transform: uppercase;
 }
 QPushButton:hover {
-	background-color: #ff6666;
+	background-color: #ff5555;
 }
 QPushButton:focus {
 	border: none;
@@ -285,7 +285,7 @@ QComboBox:checked {
 	border:2px solid #384980;
 }
 QComboBox:editable {
-	background: #ff6666;
+	background: #ff5555;
 	color: #616161;
 	border: 0px solid transparent;
 }
@@ -681,7 +681,7 @@ QDialog#SignVerifyMessageDialog QPushButton#addressBookButton_SM {
 }
 QDialog#SignVerifyMessageDialog QPlainTextEdit {
 	/* Message Signing Text */
-	border: 1px solid #ff6666;
+	border: 1px solid #ff5555;
 	background-color: #132232;
 }
 QDialog#SignVerifyMessageDialog QPushButton#pasteButton_SM {
@@ -816,12 +816,12 @@ QWidget#PrivacyDialog QLabel {
 QWidget#PrivacyDialog QLabel#zCRULabel {
 	font-size: 14px;
 	color: #ffffff;
-	background-color: #ff6666;
+	background-color: #ff5555;
 }
 QWidget#PrivacyDialog QLabel#oCRULabel {
 	font-size: 14px;
 	color: #ffffff;
-	background-color: #ff6666;
+	background-color: #ff5555;
 }
 QWidget#PrivacyDialog QPushButton {
 	border: 0;
@@ -918,7 +918,7 @@ QDialog#RPCConsole QWidget#tab_info QLabel#label_10 {
 }
 QDialog#RPCConsole QWidget#tab_peers QLabel#peerHeading {
 	/* Peers Info Header */
-	color: #ff6666;
+	color: #ff5555;
 }
 QDialog#RPCConsole QTableView#peerWidget::item {
 	/* Peers Table Items */
@@ -945,7 +945,7 @@ QDialog#RPCConsole QPushButton#clearButton {
 }
 QDialog#RPCConsole .QGroupBox #line {
 	/* Network In Line */
-	background-color: #ff6666;
+	background-color: #ff5555;
 }
 QDialog#RPCConsole .QGroupBox #line_2 {
 	/* Network Out Line */
