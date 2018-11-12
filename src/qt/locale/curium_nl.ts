@@ -2204,8 +2204,8 @@ https://www.transifex.com/curium-project/curium-project-translations</translatio
         <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Curium netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
     </message>
     <message>
-        <source>Enter an amount of Phr to convert to zPhr</source>
-        <translation>Vul de hoeveleheid in om Phr te converteren naar zPhr</translation>
+        <source>Enter an amount of Cru to convert to zCru </source>
+        <translation>Vul de hoeveleheid in om Cru te converteren naar zCru </translation>
     </message>
     <message>
         <source>Mint Zerocoin</source>
@@ -2260,12 +2260,12 @@ https://www.transifex.com/curium-project/curium-project-translations</translatio
         <translation>Status en/of Berichten van de laatste mint actie.</translation>
     </message>
     <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zCru Control</source>
+        <translation>zCru controle</translation>
     </message>
     <message>
-        <source>zPhr Selected:</source>
-        <translation>zPhr geselecteerd:</translation>
+        <source>zCru Selected:</source>
+        <translation>zCru geselecteerd:</translation>
     </message>
     <message>
         <source>Quantity Selected:</source>
@@ -2603,8 +2603,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Bestede Zerocoin mislukt met status =</translation>
     </message>
     <message>
-        <source>zPhr Spend #: </source>
-        <translation>zPhr besteed #: </translation>
+        <source>zCru Spend #: </source>
+        <translation>zCru besteed #: </translation>
     </message>
     <message>
         <source>denomination: </source>
@@ -2627,8 +2627,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>adres:</translation>
     </message>
     <message>
-        <source>zPhr Mint</source>
-        <translation>zPhr Mint</translation>
+        <source>zCru Mint</source>
+        <translation>zCru Mint</translation>
     </message>
     <message>
         <source>Sending successful, return code: </source>
@@ -4191,32 +4191,32 @@ Wees alsjeblieft geduldig...</translation>
         <translation>watch-only</translation>
     </message>
     <message>
-        <source>Converted Phr to zPhr</source>
-        <translation>Geconverteerde Phr naar zPhr</translation>
+        <source>Converted Cru to zCru </source>
+        <translation>Geconverteerde Cru naar zCru </translation>
     </message>
     <message>
-        <source>Spent zPhr</source>
-        <translation>Uitgegeven zPhr</translation>
+        <source>Spent zCru </source>
+        <translation>Uitgegeven zCru </translation>
     </message>
     <message>
-        <source>Received Phr from zPhr</source>
-        <translation>Verkregen Phr van zPhr</translation>
+        <source>Received Cru from zCru </source>
+        <translation>Verkregen Cru van zCru </translation>
     </message>
     <message>
-        <source>Minted Change as zPhr from zPhr Spend</source>
-        <translation>Minted wisselgeld als zPhr van uitgegeven zPhr</translation>
+        <source>Minted Change as zCru from zCru Spend</source>
+        <translation>Minted wisselgeld als zCru van uitgegeven zCru </translation>
     </message>
     <message>
-        <source>Converted zPhr to Phr</source>
-        <translation>Geconverteerde zPhr naar Phr</translation>
+        <source>Converted zCru to Phr</source>
+        <translation>Geconverteerde zCru naar Phr</translation>
     </message>
     <message>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <source>zPhr Accumulator</source>
-        <translation>zPhr Accumulator</translation>
+        <source>zCru Accumulator</source>
+        <translation>zCru Accumulator</translation>
     </message>
     <message>
         <source>(n/a)</source>
@@ -4326,8 +4326,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Masternode beloning</translation>
     </message>
     <message>
-        <source>Received Phr from zPhr</source>
-        <translation>Verkregen Phr van zPhr</translation>
+        <source>Received Cru from zCru </source>
+        <translation>Verkregen Cru van zCru </translation>
     </message>
     <message>
         <source>Zerocoin Mint</source>
@@ -4338,8 +4338,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Zerocoin uitgegeven</translation>
     </message>
     <message>
-        <source>Zerocoin Spend, Change in zPhr</source>
-        <translation>Zerocoin uitgegeven, wisselgeld in zPhr</translation>
+        <source>Zerocoin Spend, Change in zCru </source>
+        <translation>Zerocoin uitgegeven, wisselgeld in zCru </translation>
     </message>
     <message>
         <source>Zerocoin Spend to Self</source>
@@ -4513,8 +4513,8 @@ Wees alsjeblieft geduldig...</translation>
 <context>
     <name>ZPhrControlDialog</name>
     <message>
-        <source>Select zPhr to Spend</source>
-        <translation>Selecteer zPhr om te spenderen</translation>
+        <source>Select zCru to Spend</source>
+        <translation>Selecteer zCru om te spenderen</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -4525,8 +4525,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>0</translation>
     </message>
     <message>
-        <source>zPhr</source>
-        <translation>zPhr</translation>
+        <source>zCru </source>
+        <translation>zCru </translation>
     </message>
     <message>
         <source>Select/Deselect All</source>
@@ -5794,7 +5794,7 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Schakel alle Curium specifieke functionaliteit uit (Masternodes, Verduistering, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
     </message>
 	<message>
-        <source>Enable automatic wallet backups triggered after each zPhr minting (0-1, default: %u)</source>
+        <source>Enable automatic wallet backups triggered after each zCru minting (0-1, default: %u)</source>
         <translation>Schakel automatische portemonnee-backups in die geactiveerd worden na elke zCRU-munting (0-1, standaard: %u)</translation>
     </message>
 	<message>
@@ -5977,8 +5977,8 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Curium Alert&quot; admin@fo
 <context>
     <name>zcrucontroldialog</name>
     <message>
-        <source>Select zPhr to Spend</source>
-        <translation>Selecteer zPhr om te spenderen</translation>
+        <source>Select zCru to Spend</source>
+        <translation>Selecteer zCru om te spenderen</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -6000,12 +6000,12 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Curium Alert&quot; admin@fo
         <translation>Privacy</translation>
     </message>
 <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zCru Control</source>
+        <translation>zCru controle</translation>
     </message>
     <message>
-        <source>zPhr Selected:</source>
-        <translation>zPhr geselecteerd:</translation>
+        <source>zCru Selected:</source>
+        <translation>zCru geselecteerd:</translation>
     </message>
     <message>
         <source>CRU which were anonymized via Zerocin Protocol</source>
@@ -6024,8 +6024,8 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Curium Alert&quot; admin@fo
         <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Curium netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
     </message>
     <message>
-        <source>Enter an amount of Phr to convert to zPhr</source>
-        <translation>Vul de hoeveleheid in om Phr te converteren naar zPhr</translation>
+        <source>Enter an amount of Cru to convert to zCru </source>
+        <translation>Vul de hoeveleheid in om Cru te converteren naar zCru </translation>
     </message>
     <message>
         <source>Mint Zerocoin</source>
@@ -6072,8 +6072,8 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Curium Alert&quot; admin@fo
         <translation>Status en/of Berichten van de laatste mint actie.</translation>
     </message>
     <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zCru Control</source>
+        <translation>zCru controle</translation>
     </message>
     <message>
         <source>Quantity Selected:</source>

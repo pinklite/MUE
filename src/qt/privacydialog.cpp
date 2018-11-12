@@ -35,7 +35,7 @@ PrivacyDialog::PrivacyDialog(QWidget* parent) : QDialog(parent),
     ui->securityLevel->setAttribute(Qt::WA_MacShowFocusRect, 0);
     ui->payTo->setAttribute(Qt::WA_MacShowFocusRect, 0);
     ui->addAsLabel->setAttribute(Qt::WA_MacShowFocusRect, 0);
-    ui->zPHRpayAmount->setAttribute(Qt::WA_MacShowFocusRect, 0);
+    ui->zCRUpayAmount->setAttribute(Qt::WA_MacShowFocusRect, 0);
     
 
     // "Spending 999999 zCRU ought to be enough for anybody." - Bill Gates, 2017
