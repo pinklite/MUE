@@ -336,7 +336,7 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     receiveCoinsIcon.addFile(":/icons/receiving_addresses_off",QSize(40,40),QIcon::Normal,QIcon::Off);
 
     receiveCoinsAction = new QAction(QIcon(), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and phore: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and curium: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setIcon(receiveCoinsIcon);

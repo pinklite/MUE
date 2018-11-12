@@ -768,7 +768,7 @@ zCRU are mature when they have more than 20 confirmations AND more than 1 mint o
                              <string>The Curium address to send the payment to. Creates local payment to yourself when empty.</string>
                             </property>
                             <property name="placeholderText">
-                             <string>Enter a Phore address (e.g. PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</string>
+                             <string>Enter a Curium address (e.g. PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</string>
                             </property>
                            </widget>
                           </item>

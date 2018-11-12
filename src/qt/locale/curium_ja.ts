@@ -5418,7 +5418,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Curium Alert&quot; admin@foo.c
         <translation>Curiumの全特徴を無効化する(マスターノード/匿名化/SwiftX/予算案) (0-1, デフォルト: %u)</translation>
     </message>
     <message>
-        <source>Enable automatic wallet backups triggered after each zPhr minting (0-1, default: %u)</source>
+        <source>Enable automatic wallet backups triggered after each zCruminting (0-1, default: %u)</source>
         <translation>zCRUへの変換後自動でウォレットをバックアップする(0-1, デフォルト: %u)</translation>
     </message>
     <message>
@@ -5931,8 +5931,8 @@ Immature: confirmed, but less than 2 mints of the same denomination after it was
         <source>Show the current status of automatic zCRU minting.
 
 To change the status (restart required):
-- enable: add &apos;enablezeromint=1&apos; to phore.conf
-- disable: add &apos;enablezeromint=0&apos; to phore.conf
+- enable: add &apos;enablezeromint=1&apos; to curium.conf
+- disable: add &apos;enablezeromint=0&apos; to curium.conf
 
 To change the percentage (no restart required):
 - menu Settings-&gt;Options-&gt;Percentage of autominted zCRU
@@ -5940,8 +5940,8 @@ To change the percentage (no restart required):
 </source>
         <translation>現在の自動zCRUミント設定について表しています。
 再起動が必要ですが、設定を変更するには:
-- 有効化: &apos;enablezeromint=1&apos; を phore.conf へ追記
-- 無効化: &apos;enablezeromint=0&apos; を phore.conf へ追記
+- 有効化: &apos;enablezeromint=1&apos; を curium.conf へ追記
+- 無効化: &apos;enablezeromint=0&apos; を curium.conf へ追記
 変換する割合を変更するには(再起動は必要ありません):
 - メニューの設定-&gt;オプション-&gt;zCRUの自動ミントの割合 より変更</translation>
     </message>
