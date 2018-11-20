@@ -70,9 +70,9 @@ public:
 		return mnAliasCache;
 	}
 	
-	std::string setMnAliasCache(std::string MnAliasCache)
+	std::string setMnAliasCache(std::string mnAliasCaches)
 	{
-		mnAliasCache = MnAliasCache;
+		mnAliasCache = mnAliasCaches;
 	}
 
     QString getAddress() const;
