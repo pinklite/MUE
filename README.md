@@ -10,15 +10,14 @@ Curium is a cutting edge cryptocurrency, with many features not available in mos
   with collateral of 10K CRU
 - Decentralized blockchain voting utilizing Masternode technology to form a DAO. The blockchain will distribute monthly treasury funds based on successful proposals submitted by the community and voted on by the DAO.
 
-17.6M curium was produced for swapping. 500k were mined 1-200 blocks to bring that amount to 18.1M CRU, the amount needed for the swap.
 
 Since then, the Curium repository has been rebaselined to show the fork relationship properly.
 
 ## BCT Thread ##
 
-https://bitcointalk.org/index.php?topic=2307909.0
+https://bitcointalk.org/index.php?topic=3076542.0
 
-Rebrand from KryptKoin [KTK] to Curium [CRU]
+Rebrand from Old Curium [CRU] to Curium [CRU]
 
 ## Coin Specs ##
 <table>
@@ -29,7 +28,7 @@ Rebrand from KryptKoin [KTK] to Curium [CRU]
 </table>
 
 ## PoS Rewards Breakdown ##
-
+##  Not Correct ##
 <table>
 <th>Block Height</th><th>Reward</th><th>Masternodes</th><th>Stakers</th>
 <tr><td><= 755,600</td><td>7.7 CRU</td><td>4.2 CRU</td><td>2.8 CRU</td></tr>
