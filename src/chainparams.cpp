@@ -65,16 +65,19 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (81603, uint256("f0577a749d725d7e7f43a7203a7ece7013e96c9deaba94db45a510c2c22368ef"))
     (94255, uint256("ff6e698a7df1e927c0f348b05e8287e835220d74889f0a1afb6456d27d322ceb"))
     (150000, uint256("e9bf0a8b7536a41bdded98bfb759573e1296ee241f9112a4127dc5d5b339efe6"))
-
     (230000, uint256("a335d371b0ef5269e76689908beb3939630de93dea62cdb955a7e3b2f50228c3"))
-    (230000, uint256("a335d371b0ef5269e76689908beb3939630de93dea62cdb955a7e3b2f50228c3"));
+    (240000, uint256("e95e148f894f065cf403696e260968a19544f19e179245d0b366b6840da85bcf"))
+    (250000, uint256("31fc8c36d3c78c8c4020715b951b7c527d3e69b35d6f64e8a1ff70cc4d7c8df6"))
+    (258000, uint256("14f299b090b4b1f5f9d0e63ad2e394f3ab682ea157a552ea2cf7ca5e6b7e83c1"))
+    (259754, uint256("92b5e3a86f173375f09db993e4ef0c74292ec685f3e3abba3e483c68f3869be5"))
+    (259846, uint256("a335d371b0ef5269e76689908beb3939630de93dea62cdb955a7e3b2f50228c3"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1532709018, // * UNIX timestamp of last checkpoint block
-    190874,     // * total number of transactions between genesis and last checkpoint
+    1542781142, // * UNIX timestamp of last checkpoint block
+    528982,     // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
-    1500        // * estimated number of transactions per day after checkpoint
+    1440        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
@@ -180,8 +183,8 @@ public:
         assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
         assert(genesis.hashMerkleRoot == uint256("0x8738140c726a5ee4eabd99024115280f825c57bae6decc2b14251b917152df4f"));
 
-        vSeeds.push_back(CDNSSeedData("1stdnsseedforcurium", "dnsseed.mrmetech.me"));     // Primary DNS Seeder from Fuzzbawls
-        vSeeds.push_back(CDNSSeedData("curium1", "207.246.120.137"));    // Secondary DNS Seeder from Fuzzbawls
+        vSeeds.push_back(CDNSSeedData("1stdnsseedforcurium", "dnsseed.mrmetech.me"));     // Primary DNS Seeder
+        vSeeds.push_back(CDNSSeedData("curium1", "207.246.120.137"));    // Secondary DNS Seeder
         vSeeds.push_back(CDNSSeedData("curium2", "159.203.138.56"));         // Single node address
         vSeeds.push_back(CDNSSeedData("curium3", "46.101.62.236"));         // Single node address
 
