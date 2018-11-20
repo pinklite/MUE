@@ -76,9 +76,7 @@ void ConfigureMasternodePage::counter(int counter)
 
 void ConfigureMasternodePage::MNAliasCache(std::string MnAliasCache)
 {
-	LogPrintf("Test 2.1 autofill outid2: %s\n", MnAliasCache);
    setMnAliasCache(MnAliasCache);
-   LogPrintf("Test 2.2 autofill outid2: %s\n", MnAliasCache);
 }
 
 void ConfigureMasternodePage::loadIP(QString strIP)
@@ -114,13 +112,10 @@ void ConfigureMasternodePage::saveCurrentRow()
 		masternodeConfig.writeToMasternodeConf();
         break;
     case EditConfigureMasternode:
-		LogPrintf("Test 4.1 autofill outid2: \n");
 		if(ui->aliasEdit->text().toStdString().empty() || ui->vpsIpEdit->text().toStdString().empty() || ui->privKeyEdit->text().toStdString().empty() || ui->outputEdit->text().toStdString().empty() || ui->outputIdEdit->text().toStdString().empty()) {
 			break;
 		}
-		LogPrintf("Test 4.2 autofill outid2: \n");
 		ConfigureMasternodePage::updateAlias(ui->aliasEdit->text().toStdString(), ui->vpsIpEdit->text().toStdString(), ui->privKeyEdit->text().toStdString(), ui->outputEdit->text().toStdString(), ui->outputIdEdit->text().toStdString());
-		LogPrintf("Test 4.3 autofill outid2: \n");
 		break;
     }
 }
@@ -135,14 +130,10 @@ void ConfigureMasternodePage::accept()
 
 void ConfigureMasternodePage::updateAlias(std::string Alias, std::string IP, std::string PrivKey, std::string TxHash, std::string OutputIndex)
 {
-	LogPrintf("Test 3.1 autofill outid2: \n");
 	std::string MnAlias = "";
 	MnAlias = getMnAliasCache();
-	LogPrintf("Test 3.2 autofill outid2: %s\n", MnAlias);
 	BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
-		LogPrintf("Test 3.3 autofill outid2: \n");
 		if(MnAlias == mne.getAlias()) {
-			LogPrintf("Test 3.4 autofill outid2: \n");
 			int count = 0;
 			count = getCounters();
 			vector<COutPoint> confLockedCoins;
@@ -178,22 +169,16 @@ void ConfigureMasternodePage::on_AutoFillOutputs_clicked()
     // Find possible candidates
     vector<COutput> possibleCoins = activeMasternode.SelectCoinsMasternode();
         int test = 0;
-    LogPrintf("Test 1.1 autofill: \n");
     BOOST_FOREACH (COutput& out, possibleCoins) {
         std::string TXHash = out.tx->GetHash().ToString();
         std::string OutputID = std::to_string(out.i);
-        LogPrintf("Test 1.2 autofill txhash: %s\n", TXHash);
-        LogPrintf("Test 1.3 autofill outid: %s\n", OutputID);
                 BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
-                        LogPrintf("Test 1.3 autofill outid2: %s\n", mne.getOutputIndex());
-                        LogPrintf("Test 1.3 autofill txhash2: %s\n", mne.getTxHash());
                         if(OutputID == mne.getOutputIndex() && TXHash == mne.getTxHash()) {
                                 test = 1;
-                                LogPrintf("Test 1.4 helo helo autofill: %s\n");
+
                         }
                 }
 
-                LogPrintf("Test 1.5 autofill: %s\n", std::to_string(test));
                 if(test == 0) {
                         ui->outputEdit->setText(QString::fromStdString(out.tx->GetHash().ToString()));
                         ui->outputIdEdit->setText(QString::fromStdString(std::to_string(out.i)));
