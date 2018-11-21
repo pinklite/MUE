@@ -65,7 +65,7 @@ public:
 		counters = counter;
 	}
 	
-	std::string getMnAliasCache()
+	QString getMnAliasCache()
 	{
 		return mnAliasCache;
 	}
