@@ -70,7 +70,7 @@ public:
 		return mnAliasCache;
 	}
 	
-	std::string setMnAliasCache(QString mnAliasCaches)
+	QString setMnAliasCache(QString mnAliasCaches)
 	{
 		mnAliasCache = mnAliasCaches;
 	}
