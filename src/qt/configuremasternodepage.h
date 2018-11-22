@@ -70,7 +70,7 @@ public:
 		return mnAliasCache;
 	}
 	
-	QString setMnAliasCache(QString mnAliasCaches)
+	void setMnAliasCache(QString mnAliasCaches)
 	{
 		mnAliasCache = mnAliasCaches;
 	}
