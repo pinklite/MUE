@@ -70,7 +70,7 @@ void ConfigureMasternodePage::loadAlias(QString strAlias)
 
 void ConfigureMasternodePage::counter(int counter)
 {
-   setCounters(counter);
+   ConfigureMasternodePage::setCounters(counter);
 }
 
 
@@ -116,7 +116,7 @@ void ConfigureMasternodePage::saveCurrentRow()
 			break;
 		}
 	    
-	    QString MnAlias = getMnAliasCache();
+	    QString MnAlias = ConfigureMasternodePagegetMnAliasCache();
 		ConfigureMasternodePage::updateAlias(ui->aliasEdit->text().toStdString(), ui->vpsIpEdit->text().toStdString(), ui->privKeyEdit->text().toStdString(), ui->outputEdit->text().toStdString(), ui->outputIdEdit->text().toStdString(), MnAlias.toStdString());
 		break;
     }
