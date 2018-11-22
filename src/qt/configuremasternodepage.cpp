@@ -116,7 +116,7 @@ void ConfigureMasternodePage::saveCurrentRow()
 			break;
 		}
 	    
-	    QString MnAlias = ConfigureMasternodePagegetMnAliasCache();
+	    QString MnAlias = ConfigureMasternodePage::getMnAliasCache();
 		ConfigureMasternodePage::updateAlias(ui->aliasEdit->text().toStdString(), ui->vpsIpEdit->text().toStdString(), ui->privKeyEdit->text().toStdString(), ui->outputEdit->text().toStdString(), ui->outputIdEdit->text().toStdString(), MnAlias.toStdString());
 		break;
     }
