@@ -5773,6 +5773,30 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
             return false;
         }
+        // broken release with wrong protocol version
+        if (pfrom->cleanSubVer == "/Curium Core:1.3.2/") {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
+            return false;
+        }
+        // broken release with wrong protocol version
+        if (pfrom->cleanSubVer == "/Curium Core:1.3.2.1/") {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
+            return false;
+        }
+        // broken release with wrong protocol version
+        if (pfrom->cleanSubVer == "/Curium Core:1.3.1/") {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
+            return false;
+        }
+        // broken release with wrong protocol version
+        if (pfrom->cleanSubVer == "/Curium Core:1.3.0/") {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
+            return false;
+        }	    
         if (!vRecv.empty())
             vRecv >> pfrom->nStartingHeight;
         if (!vRecv.empty())
