@@ -68,7 +68,7 @@ private:
     SendCoinsDialog* sendCoinsPage;
     BlockExplorer* explorerWindow;
     MasternodeList* masternodeListPage;
-    QWidget* proposalListPage;
+    QWidget* proposalListPage;	
 
     TransactionView* transactionView;
     ProposalList* proposalList;

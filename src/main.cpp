@@ -3664,7 +3664,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
             // start at the block we're adding on to
             CBlockIndex *last = pindexPrev;
 
-             // while that block is not on the main chain
+            // while that block is not on the main chain
             while (!chainActive.Contains(last) && last != NULL) {
                 CBlock bl;
                 ReadBlockFromDisk(bl, last);
@@ -3682,7 +3682,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                     }
                 }
 
-                 // go to the parent block
+                // go to the parent block
                 last = last->pprev;
             }
         }
