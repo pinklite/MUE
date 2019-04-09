@@ -33,7 +33,7 @@ public:
         votesNeeded(0)
     {}
 
-    ProposalRecord(QString hash, const CAmount& start_epoch, const CAmount& end_epoch, const int& totalPaymentCount, const int& remainingPaymentCount, QString url, QString name, const CAmount& yesVotes, const CAmount& noVotes, const CAmount& abstainVotes, const CAmount& amount, const CAmount& votesNeeded) :
+    ProposalRecord(QString hash, const CAmount& start_epoch, const CAmount& end_epoch, const int& totalPaymentCount, const int& remainingPaymentCount, QString url, QString name, const int yesVotes, const int noVotes, const int abstainVotes, const CAmount amount, const int votesNeeded) :
         hash(hash),
         start_epoch(start_epoch),
         end_epoch(end_epoch),
@@ -55,11 +55,11 @@ public:
     int remainingPaymentCount;
     QString url;
     QString name;
-    CAmount yesVotes;
-    CAmount noVotes;
-    CAmount abstainVotes;
+    int yesVotes;
+    int noVotes;
+    int abstainVotes;
     CAmount amount;
-    CAmount votesNeeded;
+    int votesNeeded;
 };
 
 #endif // BITCOIN_QT_PROPOSALRECORD_H
