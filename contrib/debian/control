@@ -1,8 +1,8 @@
 Source: monetaryunit
 Section: utils
 Priority: optional
-Maintainer: Julian Meyer <julian@monetaryunit.io>
-Uploaders: Julian Meyer <julian@monetaryunit.io>
+Maintainer: Mike Trisko <mike@phore.io>
+Uploaders: Mike Trisko <mike@phore.io>
 Build-Depends: debhelper,
  devscripts,
  automake,
