@@ -66,7 +66,7 @@ ProposalDialog::ProposalDialog(Mode mode, QWidget* parent) : QDialog(parent), ui
     ui->blockEdit->setValidator(new QIntValidator(1, INT_MAX));
 
     ui->addressEdit->setFont(GUIUtil::bitcoinAddressFont());
-    ui->addressEdit->setPlaceholderText(tr("The Phore public address that will receive the funds"));
+    ui->addressEdit->setPlaceholderText(tr("The MonetaryUnit public address that will receive the funds"));
     ui->addressEdit->setToolTip(tr("The MonetaryUnit public address that will receive the funds"));
 
     ui->amountEdit->setFont(GUIUtil::bitcoinAddressFont());
