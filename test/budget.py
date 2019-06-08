@@ -90,12 +90,12 @@ class Node :
 	def createDataDir(self, nodeCount, masterNodePrivateKey = None) :
 		makeDirs(self._nodePath)
 		writeFile(
-			os.path.join(self._nodePath, 'phore.conf'),
-			self._generatePhoreConf(nodeCount, masterNodePrivateKey)
+			os.path.join(self._nodePath, 'monetaryunit.conf'),
+			self._generateMonetaryunitConf(nodeCount, masterNodePrivateKey)
 		)
 		
 	def startNode(self) :
-		self._daemonProcess = subprocess.Popen([ self._phored, '-datadir=' + self._nodePath, '-daemon' ])
+		self._daemonProcess = subprocess.Popen([ self._monetaryunitd, '-datadir=' + self._nodePath, '-daemon' ])
 		
 	def stopNode(self) :
 		self.executeCli('stop')
@@ -137,13 +137,13 @@ class Node :
 		print('waitNodeStarting failed')
 		return False
 
-	def _generatePhoreConf(self, nodeCount, masterNodePrivateKey) :
+	def _generateMonetaryunitConf(self, nodeCount, masterNodePrivateKey) :
 		result = ""
 		result += "regtest=1\n"
 		result += "server=1\n"
 		result += "debug=1\n"
 		result += "debug=net\n"
-		result += "debug=phore\n"
+		result += "debug=monetaryunit\n"
 		result += "rpcuser=%s\n" % (self._rpcUser)
 		result += "rpcpassword=%s\n" % (self._rpcPassword)
 		result += "port=%d\n" % (getNodePort(self._nodeIndex))
@@ -199,13 +199,13 @@ class Application :
 		makeDirs(self._rootPath)
 		print('Root path: %s' % (self._rootPath))
 		
-		self._phored = os.getenv('PHORED', None)
-		if not self._phored :
-			die('Undefined PHORED')
+		self._monetaryunitd = os.getenv('MONETARYUNITD', None)
+		if not self._monetaryunitd :
+			die('Undefined MONETARYUNITD')
 		self._monetaryunitCli = os.getenv('MONETARYUNITCLI', None)
 		if not self._monetaryunitCli :
 			die('Undefined MONETARYUNIT')
-		print('phored: %s' % (self._monetaryunitd))
+		print('monetaryunitd: %s' % (self._monetaryunitd))
 	
 	def _cleanup(self) :
 		self._stopAllNodes()
@@ -411,8 +411,8 @@ class Application :
 	def getRootPath(self) :
 		return self._rootPath
 		
-	def getPhored(self) :
-		return self._phored
+	def getMonetaryunitd(self) :
+		return self._monetaryunitd
 
 	def getMonetaryunitCli(self) :
 		return self._monetaryunitCli
