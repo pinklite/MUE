@@ -76,6 +76,12 @@ struct CompareValueOnly {
     }
 };
 
+enum class CWallet::CoinSelectStrategy
+{
+	random,
+	descentByAmount,
+};
+
 std::string COutput::ToString() const
 {
     return strprintf("COutput(%s, %d, %d) [%s]", tx->GetHash().ToString(), i, nDepth, FormatMoney(tx->vout[i].nValue));
@@ -2318,7 +2324,7 @@ bool CWallet::MintableCoins()
     return false;
 }
 
-bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int nConfTheirs, vector<COutput> vCoins, set<pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet) const
+bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int nConfTheirs, vector<COutput> vCoins, set<pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, CoinSelectStrategy coinSelectStrategy) const
 {
     setCoinsRet.clear();
     nValueRet = 0;
@@ -2330,7 +2336,18 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int
     vector<pair<CAmount, pair<const CWalletTx*, unsigned int> > > vValue;
     CAmount nTotalLower = 0;
 
-    random_shuffle(vCoins.begin(), vCoins.end(), GetRandInt);
+	switch(coinSelectStrategy) {
+	case CoinSelectStrategy::descentByAmount:
+		std::sort(vCoins.begin(), vCoins.end(), [](const COutput & a, const COutput & b) -> bool {
+			return a.Value() > b.Value();
+		});
+		break;
+
+	case CoinSelectStrategy::random:
+	default:
+		random_shuffle(vCoins.begin(), vCoins.end(), GetRandInt);
+		break;
+	}
 
     // move denoms down on the list
     sort(vCoins.begin(), vCoins.end(), less_then_denom);
@@ -2425,7 +2442,7 @@ bool CWallet::SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int
     return true;
 }
 
-bool CWallet::SelectCoins(const CAmount& nTargetValue, set<pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl* coinControl, AvailableCoinsType coin_type, bool useIX) const
+bool CWallet::SelectCoins(const CAmount& nTargetValue, set<pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, CoinSelectStrategy coinSelectStrategy, const CCoinControl* coinControl, AvailableCoinsType coin_type, bool useIX) const
 {
     // Note: this function should never be used for "always free" tx types like dstx
 
@@ -2471,9 +2488,9 @@ bool CWallet::SelectCoins(const CAmount& nTargetValue, set<pair<const CWalletTx*
         return (nValueRet >= nTargetValue);
     }
 
-    return (SelectCoinsMinConf(nTargetValue, 1, 6, vCoins, setCoinsRet, nValueRet) ||
-            SelectCoinsMinConf(nTargetValue, 1, 1, vCoins, setCoinsRet, nValueRet) ||
-            (bSpendZeroConfChange && SelectCoinsMinConf(nTargetValue, 0, 1, vCoins, setCoinsRet, nValueRet)));
+    return (SelectCoinsMinConf(nTargetValue, 1, 6, vCoins, setCoinsRet, nValueRet, coinSelectStrategy) ||
+            SelectCoinsMinConf(nTargetValue, 1, 1, vCoins, setCoinsRet, nValueRet, coinSelectStrategy) ||
+            (bSpendZeroConfChange && SelectCoinsMinConf(nTargetValue, 0, 1, vCoins, setCoinsRet, nValueRet, coinSelectStrategy)));
 }
 
 struct CompareByPriority {
@@ -2801,6 +2818,18 @@ bool CWallet::ConvertList(std::vector<CTxIn> vCoins, std::vector<CAmount>& vecAm
     return true;
 }
 
+enum class ErrorOfCreateTransaction
+{
+	other,
+	transactionSizeTooLarge,
+};
+
+struct CWallet::ParamForCreateTransaction
+{
+	CoinSelectStrategy coinSelectStrategy;
+	ErrorOfCreateTransaction error;
+};
+
 bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
     CWalletTx& wtxNew,
     CReserveKey& reservekey,
@@ -2810,6 +2839,57 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
     AvailableCoinsType coin_type,
     bool useIX,
     CAmount nFeePay)
+{
+	ParamForCreateTransaction param = {};
+
+	param.coinSelectStrategy = CoinSelectStrategy::random;
+	param.error = ErrorOfCreateTransaction::other;
+	bool result = CreateTransactionHelper(
+		vecSend,
+		wtxNew,
+		reservekey,
+		nFeeRet,
+		strFailReason,
+		coinControl,
+		coin_type,
+		useIX,
+		nFeePay,
+		&param
+	);
+	if(result) {
+		return result;
+	}
+	if(param.error == ErrorOfCreateTransaction::transactionSizeTooLarge) {
+		// If the transaction is too large for the maximum fee, let's try to use different strategy to select coins.
+		param.coinSelectStrategy = CoinSelectStrategy::descentByAmount;
+		param.error = ErrorOfCreateTransaction::other;
+		result = CreateTransactionHelper(
+			vecSend,
+			wtxNew,
+			reservekey,
+			nFeeRet,
+			strFailReason,
+			coinControl,
+			coin_type,
+			useIX,
+			nFeePay,
+			&param
+		);
+	}
+
+	return result;
+}
+
+bool CWallet::CreateTransactionHelper(const std::vector<std::pair<CScript, CAmount> >& vecSend,
+    CWalletTx& wtxNew,
+    CReserveKey& reservekey,
+    CAmount& nFeeRet,
+    std::string& strFailReason,
+    const CCoinControl* coinControl,
+    AvailableCoinsType coin_type,
+    bool useIX,
+    CAmount nFeePay,
+    ParamForCreateTransaction * param)
 {
     if (useIX && nFeePay < CENT) nFeePay = CENT;
 
@@ -2881,7 +2961,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
                 set<pair<const CWalletTx*, unsigned int> > setCoins;
                 CAmount nValueIn = 0;
 
-                if (!SelectCoins(nTotalValue, setCoins, nValueIn, coinControl, coin_type, useIX)) {
+                if (!SelectCoins(nTotalValue, setCoins, nValueIn, param->coinSelectStrategy, coinControl, coin_type, useIX)) {
                     if (coin_type == ALL_COINS) {
                         strFailReason = _("Insufficient funds.");
                     } else if (coin_type == ONLY_NOT500000IFMN) {
@@ -3011,6 +3091,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, CAmount> >& vecSend,
                 // Limit size
                 if (GetTransactionCost(txNew) >= MAX_STANDARD_TX_COST) {
                     strFailReason = _("Transaction too large");
+					param->error = ErrorOfCreateTransaction::transactionSizeTooLarge;
                     return false;
                 }
                 unsigned int nBytes = GetVirtualTransactionSize(txNew);
