@@ -179,10 +179,8 @@ public:
         assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
         assert(genesis.hashMerkleRoot == uint256("0x8738140c726a5ee4eabd99024115280f825c57bae6decc2b14251b917152df4f"));
 
-        vSeeds.push_back(CDNSSeedData("1stdnsseedforcurium", "dnsseed.mrmetech.me"));     // Primary DNS Seeder
-        vSeeds.push_back(CDNSSeedData("curium1", "207.246.120.137"));    // Secondary DNS Seeder
-        vSeeds.push_back(CDNSSeedData("curium2", "159.203.138.56"));         // Single node address
-        vSeeds.push_back(CDNSSeedData("curium3", "46.101.62.236"));         // Single node address
+        vSeeds.push_back(CDNSSeedData("dns0", "dns0.curiumofficial.com"));     // Primary DNS Seeder
+        vSeeds.push_back(CDNSSeedData("dns1", "dns1.curiumofficial.com"));    // Secondary DNS Seeder
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
@@ -252,7 +250,7 @@ public:
         pchMessageStart[2] = 0x65;
         pchMessageStart[3] = 0xba;
         vAlertPubKey = ParseHex("04d7e13bc896eb07e2db2d7272f5ddfaedfb64b8ed4caa4d917d6e0781b59ca44f8b5d40995622008e40707b47687eebee11cbe3bbaf2348622cc271c7f0d0bd0a");
-        nDefaultPort = 11773;
+        nDefaultPort = 18747;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
@@ -343,7 +341,7 @@ public:
         nZerocoinStartHeight = 100;
 
         hashGenesisBlock = genesis.GetHash();
-        nDefaultPort = 11773;
+        nDefaultPort = 18747;
         assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
 
         bech32_hrp = "pget";
