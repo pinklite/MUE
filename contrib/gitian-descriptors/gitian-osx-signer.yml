@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/curiumproject/curium-detached-sigs.git"
+- "url": "https://github.com/curiumofficial/curium-detached-sigs.git"
   "dir": "signature"
 files:
 - "curium-osx-unsigned.tar.gz"
