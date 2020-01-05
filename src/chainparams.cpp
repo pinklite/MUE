@@ -187,8 +187,8 @@ public:
         assert(hashGenesisBlock == uint256("0x20438ea808f386bca78de64fc78320312af41d0d828763a9f5dd444d8ba7b54c"));
         assert(genesis.hashMerkleRoot == uint256("0x8738140c726a5ee4eabd99024115280f825c57bae6decc2b14251b917152df4f"));
 
-        vSeeds.push_back(CDNSSeedData("dns0", "dns0.curiumofficial.com"));     // Primary DNS Seeder
-        vSeeds.push_back(CDNSSeedData("dns1", "dns1.curiumofficial.com"));    // Secondary DNS Seeder
+        vSeeds.push_back(CDNSSeedData("dns0", "dns0.curium.phore.io"));     // Primary DNS Seeder
+        vSeeds.push_back(CDNSSeedData("dns1", "dns1.curium.phore.io"));    // Secondary DNS Seeder
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 60);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 13);
