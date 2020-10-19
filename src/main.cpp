@@ -974,6 +974,7 @@ bool CheckTransaction(const CTransaction& tx, bool fRejectBadUTXO, CValidationSt
         if (vInOutPoints.count(txin.prevout))
             return state.DoS(100, error("CheckTransaction() : duplicate inputs"),
                 REJECT_INVALID, "bad-txns-inputs-duplicate");
+        vInOutPoints.insert(txin.prevout);
     }
 
     if (tx.IsCoinBase()) {
@@ -3247,6 +3248,17 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         LogPrintf("CheckBlock() : skipping transaction locking checks\n");
     }
 
+    if (IsSporkActive(SPORK_20_TX_CHECK)) {
+        // check transactions
+        int blockHeight = chainActive.Height();
+        if (blockHeight >= 3000) {
+            for (const CTransaction& tx : block.vtx) {
+                if (!CheckTransaction(tx, true, state, false))
+                    return error("%s : CheckTransaction failed", __func__);
+            }
+        }
+    }
+
     // masternode payments / budgets
     CBlockIndex* pindexPrev = chainActive.Tip();
     int nHeight = 0;
@@ -3452,8 +3464,20 @@ bool IsTransactionInChain(const uint256& txId, int& nHeightTx) {
     return IsTransactionInChain(txId, nHeightTx, tx);
 }
 
+bool fGenesisSeen = false;
+
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex* const pindexPrev)
 {
+    if (!fGenesisSeen) {
+        uint256 hash = block.GetHash();
+        if (hash == Params().HashGenesisBlock()) {
+             fGenesisSeen = true;
+             return true;
+        }
+    }
+
+    assert(pindexPrev);
+
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
 
     // Check that all transactions are finalized
@@ -5802,7 +5826,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
+    if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
         return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }

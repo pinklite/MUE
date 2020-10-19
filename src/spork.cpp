@@ -126,9 +126,11 @@ int64_t GetSporkValue(int nSporkID)
         if (nSporkID == SPORK_10_MASTERNODE_PAY_UPDATED_NODES) r = SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT;
         if (nSporkID == SPORK_13_ENABLE_SUPERBLOCKS) r = SPORK_13_ENABLE_SUPERBLOCKS_DEFAULT;
         if (nSporkID == SPORK_14_NEW_PROTOCOL_ENFORCEMENT) r = SPORK_14_NEW_PROTOCOL_ENFORCEMENT_DEFAULT;
+        if (nSporkID == SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2) r = SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2_DEFAULT;
         if (nSporkID == SPORK_17_SEGWIT_ACTIVATION) r = SPORK_17_SEGWIT_ACTIVATION_DEFAULT;
         if (nSporkID == SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3) r = SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3_DEFAULT;
         if (nSporkID == SPORK_19_SEGWIT_ON_COINBASE) r = SPORK_19_SEGWIT_ON_COINBASE_DEFAULT;
+        if (nSporkID == SPORK_20_TX_CHECK) r = SPORK_20_TX_CHECK_DEFAULT;
 
         if (r == -1) LogPrintf("GetSpork::Unknown Spork %d\n", nSporkID);
     }
@@ -192,7 +194,7 @@ bool CSporkManager::CheckSignature(CSporkMessage& spork)
     }
 
     CPubKey pubkeytemp(ParseHex(Params().SporkKeyTemp()));
-    if (spork.nTimeSigned < 1538859115 && obfuScationSigner.VerifyMessage(pubkeytemp, spork.vchSig, strMessage, errorMessage)) {
+    if (spork.nTimeSigned < 1609372800 && obfuScationSigner.VerifyMessage(pubkeytemp, spork.vchSig, strMessage, errorMessage)) {
         return true;
     }
 
@@ -275,9 +277,12 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT") return SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT;
     if (strName == "SPORK_10_MASTERNODE_PAY_UPDATED_NODES") return SPORK_10_MASTERNODE_PAY_UPDATED_NODES;
     if (strName == "SPORK_13_ENABLE_SUPERBLOCKS") return SPORK_13_ENABLE_SUPERBLOCKS;
+    if (strName == "SPORK_14_NEW_PROTOCOL_ENFORCEMENT") return SPORK_14_NEW_PROTOCOL_ENFORCEMENT;
+    if (strName == "SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2") return SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2;
     if (strName == "SPORK_17_SEGWIT_ACTIVATION") return SPORK_17_SEGWIT_ACTIVATION;
     if (strName == "SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3") return SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3;
     if (strName == "SPORK_19_SEGWIT_ON_COINBASE") return SPORK_19_SEGWIT_ON_COINBASE;
+    if (strName == "SPORK_20_TX_CHECK") return SPORK_20_TX_CHECK;
 
     return -1;
 }
@@ -292,9 +297,12 @@ std::string CSporkManager::GetSporkNameByID(int id)
     if (id == SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT) return "SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT";
     if (id == SPORK_10_MASTERNODE_PAY_UPDATED_NODES) return "SPORK_10_MASTERNODE_PAY_UPDATED_NODES";
     if (id == SPORK_13_ENABLE_SUPERBLOCKS) return "SPORK_13_ENABLE_SUPERBLOCKS";
+    if (id == SPORK_14_NEW_PROTOCOL_ENFORCEMENT) return "SPORK_14_NEW_PROTOCOL_ENFORCEMENT";
+    if (id == SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2) return "SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2";
     if (id == SPORK_17_SEGWIT_ACTIVATION) return "SPORK_17_SEGWIT_ACTIVATION";
     if (id == SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3) return "SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3";
     if (id == SPORK_19_SEGWIT_ON_COINBASE) return "SPORK_19_SEGWIT_ON_COINBASE";
+    if (id == SPORK_20_TX_CHECK) return "SPORK_20_TX_CHECK";
 
     return "Unknown";
 }

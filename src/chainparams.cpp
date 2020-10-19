@@ -69,13 +69,15 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (927800, uint256("5204e13307d738a871df82081a49c2bf841b40d181ff7879191cf99ea84eff4c"))
     (1000000, uint256("1759e6e3587ca06804f218b404b62dc53d2970feb8c6a4a7d5d7e43a74443bae"))
     (1100000, uint256("669b4018e10e297de97c28cb1d3e09e50e59ec29af9d98f4ad8f680986e0be1f"))
-    (1153500, uint256("5136bf46766c064a8c8cd2806b32fd7813330c17b9bc34bf9a1162aa7d72c4ce"));
+    (1153500, uint256("5136bf46766c064a8c8cd2806b32fd7813330c17b9bc34bf9a1162aa7d72c4ce"))
+    (1611478, uint256("6d148d492b4260fb5b0296589b8cedba8db86388f1f6470132755449673ae0a3"))
+    (1619599, uint256("b54023decaaf6a73165879838590c13d784f438e434264c24da3441f38ec1573"));
     
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1584603739, // * UNIX timestamp of last checkpoint block
-    2458095,     // * total number of transactions between genesis and last checkpoint
+    1603128685, // * UNIX timestamp of last checkpoint block
+    3500147,     // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2200        // * estimated number of transactions per day after checkpoint
 };
@@ -212,8 +214,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "04516fdb52d5d008b400317d8a79d83c85b152dc6f45b593b15fd9c3074bf2719ff4edadf6a4de4964da269ca33db7f804dc5266c2abb36bba5b08837f2efd51f4";
-        strSporkKeyTemp = "04d81bc201cf6df0e9a39b21c24000cf5a804949aaf0f352bcf07a5360e54a14bfe1090372fd502dd3646fa7f3aa5083531f8274f9b3891dbbed4b53fe89cb34c5";
+        strSporkKey = "044ac45ee5f9e37444ca5c1b6063187115b08fa0bd9a2243749d4a690663d8130f5ba43a4b00951ff1c25c93eb8177ac085deeaa4ff8a0f528322f42157b8a6f3f";
+        strSporkKeyTemp = "04516fdb52d5d008b400317d8a79d83c85b152dc6f45b593b15fd9c3074bf2719ff4edadf6a4de4964da269ca33db7f804dc5266c2abb36bba5b08837f2efd51f4";
         strObfuscationPoolDummyAddress = "PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp";
         nBudgetFeeConfirmations = 6; // Number of confirmations for the finalization fee
     }
@@ -317,8 +319,8 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKeyTemp = "049517f3cf92bcd5b1e27f03a9d8de0b979cf46add18d52975e0aa38452c7af6a79c1f9c5ad64ce5ef36900099141030b47d2e871d7f769661473cf81a7ba1491d";
-        strSporkKey = "0479732df7657e7648ffa4d0158be069fb01d7fa57fb0d6920de72fcd1b24e7baa8a068cec660cf62b8cdaff5b06dd57c0c403afc4b41992d342d0f6d437f2d42c";
+        strSporkKey = "049517f3cf92bcd5b1e27f03a9d8de0b979cf46add18d52975e0aa38452c7af6a79c1f9c5ad64ce5ef36900099141030b47d2e871d7f769661473cf81a7ba1491d";
+        strSporkKeyTemp = "04f626e785821a333f75a5f3c9298eea5260f655b6d5b0dcceec86d723da9ce30bcba1a4122710abb38a8f2c2bee7b51693bea5f397b182662dbdd7e7744a66b2c";
         strObfuscationPoolDummyAddress = "PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp";
         nBudgetFeeConfirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                      // here because we only have a 8 block finalization window on testnet
@@ -409,7 +411,7 @@ public:
         //     "PrivateKey": "923EhWh2bJHynX6d4Tqt2Q75bhTDCT1b4kff3qzDKDZHZ6pkQs7",
         //     "PublicKey": "04866dc02c998b7e1ab16fe14e0d86554595da90c36acb706a4d763b58ed0edb1f82c87e3ced065c5b299b26e12496956b9e5f9f19aa008b5c46229b15477c875a"
         // }
-        strSporkKey = "04866dc02c998b7e1ab16fe14e0d86554595da90c36acb706a4d763b58ed0edb1f82c87e3ced065c5b299b26e12496956b9e5f9f19aa008b5c46229b15477c875a";
+        strSporkKey = "04ef17241ef8f74b243c7267e0e85b580c71a2560c4e4d26cac75894e510a6cd6aa3c8134a628e1dd047544a09c3de667f95fcf658ff81ecb1e0764a29e5dc1e0b";
         strSporkKeyTemp = "04866dc02c998b7e1ab16fe14e0d86554595da90c36acb706a4d763b58ed0edb1f82c87e3ced065c5b299b26e12496956b9e5f9f19aa008b5c46229b15477c875a";
     }
     const Checkpoints::CCheckpointData& Checkpoints() const
